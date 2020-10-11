@@ -10,6 +10,6 @@ public class EmptyTask implements Task {
 
     @Override
     public void run(TaskManager _taskManager) {
-        logger.info("dummy task is being ran");
+//        logger.info("empty task is being ran");
     }
 }

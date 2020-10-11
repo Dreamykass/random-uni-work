@@ -10,25 +10,33 @@ import java.util.logging.Logger;
 public class TaskManager {
     private static final Logger logger = Logger.getLogger(TaskManager.class.getName());
 
-    private BlockingQueue<Task> taskQueue = new LinkedBlockingDeque<Task>();
-    private List<TaskRunner> runnerList = new LinkedList<TaskRunner>();
+    private final BlockingQueue<Task> taskQueue = new LinkedBlockingDeque<Task>();
+    private final List<TaskRunner> runnerList = new LinkedList<TaskRunner>();
 
     public TaskManager() {
-        int cpus = Runtime.getRuntime().availableProcessors();
-        logger.info("available cpus: " + Integer.toString(cpus));
+        addRunners();
+    }
 
-        for (int i = 0; i < cpus; i++) {
+    public TaskManager(int _n) {
+        addRunners(_n);
+    }
+
+    public void addRunners() {
+        var cpus = Runtime.getRuntime().availableProcessors();
+        addRunners(cpus);
+    }
+
+    public void addRunners(int _n) {
+        for (int i = 0; i < _n; i++) {
             runnerList.add(new TaskRunner(this));
         }
     }
 
+    // blocking
     public void stopRunners() {
-        logger.info("stopping runners: " + Integer.toString(runnerList.size()));
         for (var runner : runnerList) {
             runner.stop();
-            logger.info("stopped a runner...");
         }
-        logger.info("stopped all runners");
     }
 
     // block until _timeout milliseconds
@@ -43,8 +51,11 @@ public class TaskManager {
         taskQueue.add(_task);
     }
 
-    public int getQueueSize() {
+    public int getQueueLength() {
         return taskQueue.size();
     }
 
+    public int getNumberOfRunners() {
+        return runnerList.size();
+    }
 }
