@@ -1,20 +1,25 @@
 package sengine.crawl;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import java.net.URI;
 import java.net.URISyntaxException;
 
 public class UrlUtils {
+    private static final Logger logger = LogManager.getLogger(CrawlingTask.class);
 
     public static String domainFromUrlOrNull(String _url) {
         URI uri = null;
 
         try {
             uri = new URI(_url);
-        } catch (URISyntaxException ignore) {
+        } catch (URISyntaxException e) {
             return null;
         }
 
         //        return domain.startsWith("www.") ? domain.substring(4) : domain;
+
 
         return uri.getHost();
     }
@@ -22,6 +27,9 @@ public class UrlUtils {
     public static boolean domainOfUrlEndsWithDomain(String _url, String _expectedDomain) {
         assert _url != null;
         assert _expectedDomain != null;
+
+        if (_url.equals(_expectedDomain))
+            return true;
 
         var actualDomain = domainFromUrlOrNull(_url);
 
@@ -35,11 +43,12 @@ public class UrlUtils {
 //        else
 //            return actualDomain.equals(_expectedDomain);
 
-        if (actualDomain == null)
+        if (actualDomain == null) {
             return false;
-        else
+        } else {
 //            return actualDomain.contains(_expectedDomain);
             return actualDomain.endsWith(_expectedDomain);
+        }
     }
 
 }
