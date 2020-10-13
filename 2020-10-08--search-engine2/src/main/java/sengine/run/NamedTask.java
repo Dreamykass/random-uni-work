@@ -1,5 +1,5 @@
 package sengine.run;
 
-public interface NamedTask extends Task {
+public interface NamedTask {
     String getName();
 }

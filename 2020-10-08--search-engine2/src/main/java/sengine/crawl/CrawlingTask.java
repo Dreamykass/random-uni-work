@@ -3,13 +3,14 @@ package sengine.crawl;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import sengine.run.NamedTask;
+import sengine.run.Task;
 import sengine.run.TaskManager;
 
 import java.util.Set;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.atomic.AtomicLong;
 
-public class CrawlingTask implements NamedTask {
+public class CrawlingTask implements Task, NamedTask {
     private static final Logger logger = LogManager.getLogger(CrawlingTask.class);
 
     String currentUrl;
@@ -38,7 +39,7 @@ public class CrawlingTask implements NamedTask {
 
     @Override
     public String getName() {
-        return null;
+        return String.format("crawling domain: %s; -------- on site: %s", domainUrl, currentUrl);
     }
 
     @Override
@@ -73,10 +74,10 @@ public class CrawlingTask implements NamedTask {
             logger.debug("on page {} found this many outgoing links: {}", page.url, page.outgoingLinks.size());
 
             for (var outUrl : page.outgoingLinks) {
-                CrawlingTask crawlingTask = new CrawlingTask(outUrl, domainUrl, urlToPageMap, activeTasksN, checkedUrlsSet);
-
-                if (!checkedUrlsSet.contains(outUrl))
+                if (!checkedUrlsSet.contains(outUrl)) {
+                    CrawlingTask crawlingTask = new CrawlingTask(outUrl, domainUrl, urlToPageMap, activeTasksN, checkedUrlsSet);
                     _taskManager.pushTaskToQueue(crawlingTask);
+                }
             }
 
             urlToPageMap.put(page.url, page);

@@ -1,6 +1,7 @@
 package sengine.run;
 
 import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.atomic.AtomicReference;
 import java.util.logging.Logger;
 
 public class TaskRunner {
@@ -10,6 +11,7 @@ public class TaskRunner {
     private final TaskManager taskManager;
     private final AtomicBoolean running = new AtomicBoolean(true);
     private final AtomicBoolean shouldStop = new AtomicBoolean(false);
+    private final AtomicReference<Task> currentTask = new AtomicReference<Task>();
 
     public TaskRunner(TaskManager _taskManager) {
         assert _taskManager != null;
@@ -23,9 +25,9 @@ public class TaskRunner {
     private void threadMethod() {
         while (!shouldStop.get()) {
             try {
-                var task = taskManager.pollForTask(10);
-                if (task != null) {
-                    task.run(taskManager);
+                currentTask.set(taskManager.pollForTask(10));
+                if (currentTask.get() != null) {
+                    currentTask.get().run(taskManager);
                 }
             } catch (InterruptedException e) {
                 e.printStackTrace();
@@ -53,5 +55,14 @@ public class TaskRunner {
         return threadId;
     }
 
+    public String getCurrentTaskName() {
+        if (currentTask.get() == null) {
+            return "null?";
+        } else if (currentTask.get() instanceof NamedTask) {
+            return ((NamedTask) (currentTask.get())).getName();
+        } else {
+            return "unnamed task";
+        }
+    }
 
 }
