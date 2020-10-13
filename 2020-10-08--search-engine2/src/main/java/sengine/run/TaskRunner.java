@@ -1,11 +1,13 @@
 package sengine.run;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicReference;
-import java.util.logging.Logger;
 
 public class TaskRunner {
-    private static final Logger logger = Logger.getLogger(TaskManager.class.getName());
+    private static final Logger logger = LogManager.getLogger(TaskRunner.class);
 
     private final long threadId;
     private final TaskManager taskManager;
@@ -27,7 +29,22 @@ public class TaskRunner {
             try {
                 currentTask.set(taskManager.pollForTask(10));
                 if (currentTask.get() != null) {
-                    currentTask.get().run(taskManager);
+                    try {
+                        currentTask.get().run(taskManager);
+                    } catch (Exception e) {
+
+                        String taskName;
+                        if (currentTask.get() instanceof NamedTask) {
+                            taskName = ((NamedTask) (currentTask.get())).getName();
+                        } else {
+                            taskName = "unnamed task";
+                        }
+
+                        logger.fatal("caught Exception; threadId: {}; taskName: {}", threadId, taskName);
+                        logger.fatal("stack trace:");
+                        e.printStackTrace();
+                        logger.fatal("done ^");
+                    }
                 }
             } catch (InterruptedException e) {
                 e.printStackTrace();

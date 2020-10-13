@@ -11,12 +11,11 @@ public class CrawlPagesFromDomainTest {
 
     @Test
     public void test1() {
-        TaskManager taskManager = new TaskManager();
+        TaskManager taskManager = new TaskManager(128);
 
-//        CrawlPagesFromDomain.from("pwsz.nysa.pl", "http://pwsz.nysa.pl/", taskManager);
         CrawlPagesFromDomain.from("rekrutacja.pwsz.nysa.pl", "http://www.rekrutacja.pwsz.nysa.pl/", taskManager);
 
         taskManager.stopRunners();
-        
+
     }
 }
