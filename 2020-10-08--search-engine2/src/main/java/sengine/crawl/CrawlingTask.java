@@ -5,6 +5,7 @@ import org.apache.logging.log4j.Logger;
 import sengine.run.NamedTask;
 import sengine.run.TaskManager;
 
+import java.util.Set;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.atomic.AtomicLong;
 
@@ -15,18 +16,22 @@ public class CrawlingTask implements NamedTask {
     String domainUrl;
     ConcurrentMap<String, Page> urlToPageMap;
     AtomicLong activeTasksN;
+    Set<String> checkedUrlsSet;
 
     public CrawlingTask(String _currentUrl, String _domainUrl,
-                        ConcurrentMap<String, Page> _urlToPageMap, AtomicLong _activeTasksN) {
+                        ConcurrentMap<String, Page> _urlToPageMap, AtomicLong _activeTasksN,
+                        Set<String> _checkedUrlsSet) {
         assert _currentUrl != null;
         assert _domainUrl != null;
         assert _urlToPageMap != null;
         assert _activeTasksN != null;
+        assert _checkedUrlsSet != null;
 
         currentUrl = _currentUrl;
         domainUrl = _domainUrl;
         urlToPageMap = _urlToPageMap;
         activeTasksN = _activeTasksN;
+        checkedUrlsSet = _checkedUrlsSet;
 
         activeTasksN.incrementAndGet();
     }
@@ -41,28 +46,37 @@ public class CrawlingTask implements NamedTask {
         assert _taskManager != null;
         logger.debug("started running; currentUrl: {}, domainUrl: {}", currentUrl, domainUrl);
 
-        // ------------------ early returns:
-        if (!UrlUtils.domainOfUrlEndsWithDomain(currentUrl, domainUrl)) {
-            logger.debug("aborted; currentUrl: {}; !UrlUtils.domainOfUrlEndsWithDomain", currentUrl);
-            activeTasksN.decrementAndGet();
-            return;
-        } else if (urlToPageMap.containsKey(currentUrl)) {
-            logger.debug("aborted; currentUrl: {}; urlToPageMap.containsKey", currentUrl);
-            activeTasksN.decrementAndGet();
-            return;
+        // ------------------------------------------------------ early returns:
+        {
+            if (urlToPageMap.containsKey(currentUrl)) {
+                logger.debug("aborted; currentUrl: {}; urlToPageMap.containsKey", currentUrl);
+                activeTasksN.decrementAndGet();
+                return;
+            } else if (checkedUrlsSet.contains(currentUrl)) {
+                logger.debug("aborted; currentUrl: {}; checkedUrlsSet.contains", currentUrl);
+                activeTasksN.decrementAndGet();
+                return;
+            } else if (!UrlUtils.domainOfUrlEndsWithDomain(currentUrl, domainUrl)) {
+                logger.debug("aborted; currentUrl: {}; !UrlUtils.domainOfUrlEndsWithDomain", currentUrl);
+                activeTasksN.decrementAndGet();
+                return;
+            }
         }
 
         var rawPage = DownloadRawPage.fromUrl(currentUrl);
+        checkedUrlsSet.add(currentUrl);
 
-        // ------------------ good path:
+        // ------------------------------------------------------ good path:
         if (rawPage != null) {
             var page = RawPageIntoPage.from(rawPage);
 
             logger.debug("on page {} found this many outgoing links: {}", page.url, page.outgoingLinks.size());
 
             for (var outUrl : page.outgoingLinks) {
-                CrawlingTask crawlingTask = new CrawlingTask(outUrl, domainUrl, urlToPageMap, activeTasksN);
-                _taskManager.pushTaskToQueue(crawlingTask);
+                CrawlingTask crawlingTask = new CrawlingTask(outUrl, domainUrl, urlToPageMap, activeTasksN, checkedUrlsSet);
+
+                if (!checkedUrlsSet.contains(outUrl))
+                    _taskManager.pushTaskToQueue(crawlingTask);
             }
 
             urlToPageMap.put(page.url, page);

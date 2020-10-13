@@ -5,7 +5,9 @@ import org.apache.logging.log4j.Logger;
 import sengine.run.TaskManager;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.atomic.AtomicLong;
@@ -17,10 +19,11 @@ public class CrawlPagesFromDomain {
         logger.warn("started crawling url: {}", _startingUrl);
 
         ConcurrentMap<String, Page> urlToPageMap = new ConcurrentHashMap<String, Page>();
+        Set<String> checkedUrlsSet = Collections.newSetFromMap(new ConcurrentHashMap<String, Boolean>());
         AtomicLong activeTasksN = new AtomicLong(0);
 
 
-        CrawlingTask crawlingTask = new CrawlingTask(_startingUrl, _domainUrl, urlToPageMap, activeTasksN);
+        CrawlingTask crawlingTask = new CrawlingTask(_startingUrl, _domainUrl, urlToPageMap, activeTasksN, checkedUrlsSet);
         _taskManager.pushTaskToQueue(crawlingTask);
 
         try {

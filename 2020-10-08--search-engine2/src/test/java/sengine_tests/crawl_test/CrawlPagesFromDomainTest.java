@@ -11,7 +11,7 @@ public class CrawlPagesFromDomainTest {
         TaskManager taskManager = new TaskManager();
 
 //        CrawlPagesFromDomain.from("pwsz.nysa.pl", "http://pwsz.nysa.pl/", taskManager);
-        CrawlPagesFromDomain.from("strzelec.pwsz.nysa.pl", "http://strzelec.pwsz.nysa.pl/", taskManager);
+        CrawlPagesFromDomain.from("rekrutacja.pwsz.nysa.pl", "http://www.rekrutacja.pwsz.nysa.pl/", taskManager);
 
         taskManager.stopRunners();
     }
