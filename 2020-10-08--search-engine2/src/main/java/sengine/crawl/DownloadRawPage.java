@@ -8,64 +8,88 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.MalformedURLException;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.net.URLConnection;
 
 public class DownloadRawPage {
     private static final Logger logger = LogManager.getLogger(DownloadRawPage.class);
 
-    // or null at fail
-    public static RawPage fromUrl(String _url) {
-        assert _url != null;
-
-        RawPage rawPage = new RawPage();
-        rawPage.url = _url;
+    public static URL strToUrlIfValidHtml(String _urlString) {
         URL url;
 
-        // if url is invalid, return early
-        try {
-            url = new URL(rawPage.url);
-        } catch (MalformedURLException e) {
-            logger.warn("tried to download an invalid url, returned null instead: {}", _url);
-            return null;
-        }
-
-        // if pdf, return early
-        if (_url.endsWith(".pdf") || _url.endsWith(".png") || _url.endsWith(".jpg")) {
-            logger.info("tried to download a pdf or png or jpg, returned null instead: {}", _url);
-            return null;
-        }
-
-        // if Content-Type is not "text/html; charset=utf-8", return early
+        // set url
+        // if MalformedURLException (then return null)
         {
-            URLConnection u = null;
             try {
-                u = new URL(_url).openConnection();
-                String type = u.getHeaderField("Content-Type");
-
-                if (type == null) {
-                    logger.info("tried to download {}; Content-Type was null; aborted", _url);
-                    return null;
-                }
-
-                if (!type.equalsIgnoreCase("text/html; charset=utf-8")) {
-                    logger.info("tried to download Content-Type: {}; was not: {}; returned null instead: {}", type, "text/html; charset=utf-8", _url);
-                    return null;
-                }
-
+                url = new URL(_urlString);
             } catch (MalformedURLException e) {
-                logger.info("tried to download Content-Type: {}; caught: {}; returned null instead: {}",
-                        "MalformedURLException", "text/html; charset=utf-8", _url);
-                return null;
-            } catch (IOException e) {
-                logger.info("tried to download Content-Type: {}; caught: {}; returned null instead: {}",
-                        "IOException", "text/html; charset=utf-8", _url);
+                logger.info("strToUrlIfValid(), checking url: {}; invalid because: {}", _urlString, "MalformedURLException");
                 return null;
             }
         }
 
+        // if URL.toURI fails
+        {
+            try {
+                var uri = url.toURI();
+            } catch (URISyntaxException e) {
+                logger.info("strToUrlIfValid(), checking url: {}; invalid because: {}", _urlString, "URISyntaxException on url.toURI()");
+            }
+        }
+
+        // if pdf
+        if (_urlString.endsWith(".pdf") || _urlString.endsWith(".png") || _urlString.endsWith(".jpg")) {
+            logger.info("strToUrlIfValid(), checking url: {}; invalid because: {}", _urlString, "ends with filetype extension (.pdf, etc)");
+            return null;
+        }
+
+        // if Content-Type is not "text/html; charset=utf-8"
+        {
+            URLConnection u = null;
+            try {
+                u = new URL(_urlString).openConnection();
+                String type = u.getHeaderField("Content-Type");
+
+                if (type == null) {
+                    logger.info("strToUrlIfValid(), checking url: {}; invalid because: {}", _urlString, "Content-Type was null");
+                    return null;
+                }
+
+                if (!type.equalsIgnoreCase("text/html; charset=utf-8")) {
+                    logger.info("strToUrlIfValid(), checking url: {}; invalid because: {}{}", _urlString, "Content-Type was: ", type);
+                    return null;
+                }
+
+            } catch (MalformedURLException e) {
+                logger.info("strToUrlIfValid(), checking url: {}; invalid because: {}", _urlString, "MalformedURLException at Content-Type check");
+                return null;
+            } catch (IOException e) {
+                logger.info("strToUrlIfValid(), checking url: {}; invalid because: {}", _urlString, "IOEXCEPTION at Content-Type check");
+                return null;
+            }
+        }
+
+        // ok
+        logger.info("strToUrlIfValid(), checking url: {}; IS VALID", _urlString);
+        return url;
+    }
+
+    // or null at fail
+    public static RawPage fromUrl(String _urlString) {
+        assert _urlString != null;
+
+        RawPage rawPage = new RawPage();
+        rawPage.url = _urlString;
+        URL url;
+
+        // if url is invalid, return early
+        url = strToUrlIfValidHtml(_urlString);
+        if (url == null)
+            return null;
+
         // actually try to download
-        logger.info("attempting to download: {}", _url);
+        logger.info("attempting to download: {}", _urlString);
 
         try {
             Thread.sleep(4000);
@@ -88,6 +112,7 @@ public class DownloadRawPage {
 //            mue.printStackTrace();
             return null;
         } catch (IOException ioe) {
+            logger.warn("IOException while trying to download {}", _urlString);
             ioe.printStackTrace();
 //            assert false;
             return null;
