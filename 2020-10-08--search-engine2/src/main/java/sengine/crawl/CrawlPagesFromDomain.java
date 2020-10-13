@@ -49,7 +49,11 @@ public class CrawlPagesFromDomain {
                 outputList.add(kvp.getValue());
         }
 
-        logger.warn("finished crawling url: {}", _startingUrl);
+        logger.warn("finished crawling domain: {}; starting at url: {}", _domainUrl, _startingUrl);
+        logger.warn("crawled this many pages: {}; all links:", outputList.size());
+        for (var page : outputList)
+            logger.debug(" --- {}", page.url);
+        logger.warn("returning the list of pages");
         return outputList;
     }
 }
