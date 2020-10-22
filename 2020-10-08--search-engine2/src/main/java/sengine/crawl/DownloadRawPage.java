@@ -15,6 +15,10 @@ import java.net.URLConnection;
 public class DownloadRawPage {
     private static final Logger logger = LogManager.getLogger(DownloadRawPage.class);
 
+    /**
+     * @param _urlString
+     * @return
+     */
     public static URL strToUrlIfValidHtml(String _urlString) {
         URL url;
 

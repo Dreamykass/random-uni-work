@@ -6,7 +6,10 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class ExtractUrls {
-
+    /**
+     * @param _str
+     * @return
+     */
     public static List<String> fromString(String _str) {
         List<String> list = new ArrayList<>();
 

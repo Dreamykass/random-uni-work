@@ -9,6 +9,10 @@ import java.net.URISyntaxException;
 public class UrlUtils {
     private static final Logger logger = LogManager.getLogger(CrawlingTask.class);
 
+    /**
+     * @param _url
+     * @return
+     */
     public static String domainFromUrlOrNull(String _url) {
         URI uri = null;
 
@@ -24,6 +28,11 @@ public class UrlUtils {
         return uri.getHost();
     }
 
+    /**
+     * @param _url
+     * @param _expectedDomain
+     * @return
+     */
     public static boolean domainOfUrlEndsWithDomain(String _url, String _expectedDomain) {
         assert _url != null;
         assert _expectedDomain != null;

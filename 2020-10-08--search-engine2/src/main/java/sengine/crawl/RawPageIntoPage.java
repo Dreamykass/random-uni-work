@@ -1,6 +1,10 @@
 package sengine.crawl;
 
 public class RawPageIntoPage {
+    /**
+     * @param _rawPage
+     * @return
+     */
     public static Page from(RawPage _rawPage) {
         assert _rawPage != null;
 

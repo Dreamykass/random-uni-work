@@ -7,8 +7,12 @@ import java.util.regex.Pattern;
 
 public class ExtractWords {
 
-    public static List<String> fromString(String _str) {
-        List<String> list = new ArrayList<>();
+    /**
+     * @param _str
+     * @return
+     */
+    public static List<Word> fromString(String _str) {
+        List<Word> list = new ArrayList<>();
 
         String expr = "\\p{L}+";
         // https://stackoverflow.com/questions/3015401/how-to-deal-with-polish-characters-while-using-regex
@@ -16,7 +20,11 @@ public class ExtractWords {
         Matcher m = Pattern.compile(expr)
                 .matcher(_str);
         while (m.find()) {
-            list.add(m.group());
+            Word word = new Word();
+            word.str = m.group();
+            word.indexInWordList = list.size();
+
+            list.add(word);
         }
 
         return list;

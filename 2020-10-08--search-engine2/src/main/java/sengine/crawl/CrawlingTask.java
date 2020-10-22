@@ -10,7 +10,15 @@ import java.util.Set;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.atomic.AtomicLong;
 
+/**
+ * @author Damian Gruner
+ * Crawling Task
+ * To be used with the task system of TaskManager
+ * @version 1.0
+ * @implNote
+ */
 public class CrawlingTask implements Task, NamedTask {
+
     private static final Logger logger = LogManager.getLogger(CrawlingTask.class);
 
     String currentUrl;
@@ -19,6 +27,13 @@ public class CrawlingTask implements Task, NamedTask {
     AtomicLong activeTasksN;
     Set<String> checkedUrlsSet;
 
+    /**
+     * @param _currentUrl     current url to be crawled
+     * @param _domainUrl      domain to which the url belongs
+     * @param _urlToPageMap   concurrent map
+     * @param _activeTasksN   atomic
+     * @param _checkedUrlsSet set of checked urls
+     */
     public CrawlingTask(String _currentUrl, String _domainUrl,
                         ConcurrentMap<String, Page> _urlToPageMap, AtomicLong _activeTasksN,
                         Set<String> _checkedUrlsSet) {
@@ -37,11 +52,17 @@ public class CrawlingTask implements Task, NamedTask {
         activeTasksN.incrementAndGet();
     }
 
+    /**
+     * @return
+     */
     @Override
     public String getName() {
         return String.format("crawling domain: %s; -------- on site: %s", domainUrl, currentUrl);
     }
 
+    /**
+     * @param _taskManager
+     */
     @Override
     public void run(TaskManager _taskManager) {
         assert _taskManager != null;

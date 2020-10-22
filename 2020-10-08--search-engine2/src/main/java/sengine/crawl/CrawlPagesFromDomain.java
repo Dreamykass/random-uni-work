@@ -15,6 +15,12 @@ import java.util.concurrent.atomic.AtomicLong;
 public class CrawlPagesFromDomain {
     private static final Logger logger = LogManager.getLogger(CrawlPagesFromDomain.class);
 
+    /**
+     * @param _domainUrl
+     * @param _startingUrl
+     * @param _taskManager
+     * @return
+     */
     public static List<Page> from(String _domainUrl, String _startingUrl, TaskManager _taskManager) {
         logger.warn("started crawling url: {}", _startingUrl);
 
