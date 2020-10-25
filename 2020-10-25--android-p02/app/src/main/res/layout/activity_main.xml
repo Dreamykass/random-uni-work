@@ -36,4 +36,15 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/buttonTriangle" />
 
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="circle"
+        app:layout_constraintEnd_toEndOf="@+id/buttonText"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/buttonText"
+        app:layout_constraintTop_toBottomOf="@+id/buttonText" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -9,6 +9,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.CanvasStuff">
+        <activity android:name=".CircleActivity"></activity>
+        <activity android:name=".DrawingActivity" />
+        <activity android:name=".TriangleActivity" />
+        <activity android:name=".TextActivity" />
+        <activity android:name=".RectActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
