@@ -36,7 +36,7 @@ public class DrawingActivity extends AppCompatActivity {
         protected void onDraw(Canvas canvas) {
             super.onDraw(canvas);
 
-            paint.setStyle(Paint.Style.STROKE);
+            paint.setStyle(Paint.Style.FILL);
 
             try {
                 paint.setColor(Color.parseColor(intent.getStringExtra("color")));
@@ -45,7 +45,7 @@ public class DrawingActivity extends AppCompatActivity {
             }
 
             try {
-                intent.getStringExtra("rect");
+                intent.getStringExtra("rect").toCharArray();
                 canvas.drawRect(intent.getFloatExtra("left", 1),
                         intent.getFloatExtra("top", 2),
                         intent.getFloatExtra("right", 3),
@@ -68,7 +68,7 @@ public class DrawingActivity extends AppCompatActivity {
             }
 
             try {
-                intent.getStringExtra("circle");
+                intent.getStringExtra("circle").toCharArray();
                 canvas.drawCircle(intent.getFloatExtra("cx", 100),
                         intent.getFloatExtra("cy", 100),
                         intent.getFloatExtra("radius", 100),
