@@ -23,7 +23,8 @@ public class RectActivity extends AppCompatActivity {
 
             try {
                 intent.putExtra("rect", "");
-                intent.putExtra("color", binding.editTextTextPersonName.getText().toString());
+                intent.putExtra("color1", binding.editTextTextPersonName.getText().toString());
+                intent.putExtra("color2", binding.editTextTextPersonName4.getText().toString());
                 intent.putExtra("left", Float.parseFloat(binding.editTextNumber.getText().toString()));
                 intent.putExtra("top", Float.parseFloat(binding.editTextNumber2.getText().toString()));
                 intent.putExtra("right", Float.parseFloat(binding.editTextNumber3.getText().toString()));

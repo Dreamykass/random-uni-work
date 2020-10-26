@@ -4,7 +4,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.LinearGradient;
 import android.graphics.Paint;
+import android.graphics.Shader;
 import android.os.Bundle;
 import android.view.View;
 
@@ -42,6 +44,14 @@ public class DrawingActivity extends AppCompatActivity {
                 paint.setColor(Color.parseColor(intent.getStringExtra("color")));
             } catch (Exception ignored) {
                 paint.setColor(Color.RED);
+            }
+
+            try {
+                paint.setShader(new LinearGradient(0, 0, 0, getHeight(),
+                        Color.parseColor(intent.getStringExtra("color1")),
+                        Color.parseColor(intent.getStringExtra("color2")),
+                        Shader.TileMode.MIRROR));
+            } catch (Exception ignored) {
             }
 
             try {
