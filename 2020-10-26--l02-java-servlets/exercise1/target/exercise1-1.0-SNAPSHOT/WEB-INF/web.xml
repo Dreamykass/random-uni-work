@@ -8,11 +8,14 @@
         <servlet-class>MultiplicationServlet</servlet-class>
         <init-param>
             <param-name>multiplicationParameter</param-name>
-            <param-value>3</param-value>
+            <param-value>10</param-value>
         </init-param>
     </servlet>
     <servlet-mapping>
         <servlet-name>MultiplicationServlet</servlet-name>
         <url-pattern>/multiply.do</url-pattern>
     </servlet-mapping>
+    <!--    <welcome-file-list>-->
+    <!--        <welcome-file>multiply.do</welcome-file>-->
+    <!--    </welcome-file-list>-->
 </web-app>
