@@ -3,4 +3,26 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
          version="4.0">
+
+    <servlet>
+        <servlet-name>ServletWelcome</servlet-name>
+        <servlet-class>ServletWelcome</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ServletWelcome</servlet-name>
+        <url-pattern>/welcome.jpg</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>ServletLoggedIn</servlet-name>
+        <servlet-class>ServletLoggedIn</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ServletLoggedIn</servlet-name>
+        <url-pattern>/logged.jpg</url-pattern>
+    </servlet-mapping>
+
+    <welcome-file-list>
+        <welcome-file>welcome.jpg</welcome-file>
+    </welcome-file-list>
 </web-app>
