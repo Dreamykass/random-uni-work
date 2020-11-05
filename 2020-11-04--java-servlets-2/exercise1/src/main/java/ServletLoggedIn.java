@@ -1,5 +1,6 @@
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -42,7 +43,9 @@ public class ServletLoggedIn extends HttpServlet {
                 out.println("logging in<br>");
                 if (UserStorage.users.containsKey(params.get("login"))) {
                     if (UserStorage.users.get(params.get("login")).password.equals(params.get("password"))) {
-                        out.println("logged in<br>");
+                        out.println("logged in; adding login and password to cookies<br>");
+                        response.addCookie(new Cookie("last_login", params.get("login")));
+                        out.println("added<br>");
                     } else {
                         out.println("password wrong<br>");
                     }

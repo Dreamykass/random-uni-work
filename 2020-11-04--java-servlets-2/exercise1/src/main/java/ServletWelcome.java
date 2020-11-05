@@ -1,5 +1,6 @@
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -35,6 +36,14 @@ public class ServletWelcome extends HttpServlet {
             CookieService.htmlWriteCookies(out, request.getCookies());
             out.println("<br><br>");
 
+            String last_login = "";
+            {
+                Cookie[] cookies = request.getCookies();
+                for (Cookie cookie : cookies)
+                    if (cookie.getName().equals("last_login"))
+                        last_login = cookie.getValue();
+            }
+
             out.println("<h3>login/register form:</h3>");
             out.println("<form action=\"logged.jpg\" method=\"post\">");
             {
@@ -42,7 +51,7 @@ public class ServletWelcome extends HttpServlet {
                 out.println("<input type=\"email\" id=\"email\" name=\"email\" disabled=true><br>");
 
                 out.println("<label for=\"login\">login:</label>\n");
-                out.println("<input type=\"login\" id=\"login\" name=\"login\"><br>");
+                out.println("<input type=\"login\" id=\"login\" name=\"login\" value=\"" + last_login + "\"><br>");
 
                 out.println("<label for=\"password\">password:</label>\n");
                 out.println("<input type=\"password\" id=\"password\" name=\"password\"><br>");

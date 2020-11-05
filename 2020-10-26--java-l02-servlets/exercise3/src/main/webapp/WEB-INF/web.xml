@@ -9,7 +9,7 @@
         <servlet-class>InputServlet</servlet-class>
         <init-param>
             <param-name>size</param-name>
-            <param-value>3</param-value>
+            <param-value>5</param-value>
         </init-param>
     </servlet>
     <servlet-mapping>
