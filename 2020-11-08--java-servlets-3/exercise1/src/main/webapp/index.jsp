@@ -20,6 +20,7 @@
         }
 
         html {
+            background-color: black;
             background: url(https://www.nasa.gov/sites/default/files/thumbnails/image/potw2042a.jpg) no-repeat center center fixed;
             -webkit-background-size: cover;
             -moz-background-size: cover;
@@ -98,15 +99,15 @@
 
         .login form button {
             margin-top: 20px;
-            background: #27AE60;
+            background: #1e0324;
             border: none;
             font-size: 1.6em;
             font-weight: 300;
             padding: 5px 0;
             width: 100%;
             border-radius: 3px;
-            color: #3b1c47;
-            border-bottom: 4px solid #1e8449;
+            color: #dccae3;
+            border-bottom: 4px solid #100317;
         }
 
         .login form button:hover {
