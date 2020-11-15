@@ -3,13 +3,25 @@
     <level
         name="level 1"
         wrong_guesses="10">
-        <pair>"black.png"</pair>
-        <pair>"blue.png"</pair>
-        <pair>"green.png"</pair>
-        <pair>"orange.png"</pair>
-        <pair>"purple.png"</pair>
-        <pair>"red.png"</pair>
-        <pair>"white.png"</pair>
-        <pair>"yellow.png"</pair>
+        <pair filename="black.png" />
+        <pair filename="blue.png" />
+        <pair filename="green.png" />
+        <pair filename="orange.png" />
+        <pair filename="purple.png" />
+        <pair filename="red.png>" />
+        <pair filename="white.png" />
+        <pair filename="yellow.png" />
+    </level>
+    <level
+        name="level 2"
+        wrong_guesses="10">
+        <pair filename="black.png" />
+        <pair filename="blue.png" />
+        <pair filename="green.png" />
+        <pair filename="orange.png" />
+        <pair filename="purple.png" />
+        <pair filename="red.png>" />
+        <pair filename="white.png" />
+        <pair filename="yellow.png" />
     </level>
 </levels>
