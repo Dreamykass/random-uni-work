@@ -11,4 +11,12 @@
         <servlet-name>ServletUploader</servlet-name>
         <url-pattern>/up.do</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>ServletDownloader</servlet-name>
+        <servlet-class>ServletDownloader</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ServletDownloader</servlet-name>
+        <url-pattern>/down.do</url-pattern>
+    </servlet-mapping>
 </web-app>

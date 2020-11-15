@@ -1,4 +1,4 @@
-<%@ page import="HelperStuff.DirectoryLister" %><%--
+<%@ page import="FilesystemHelper.DirectoryLister" %><%--
   Created by IntelliJ IDEA.
   User: grune
   Date: 2020-11-09
@@ -76,7 +76,7 @@
             <br><br>
             <label for="directory">Choose a directory</label>
             <select id="directory" name="directory" class="input_select">
-                <%= HelperStuff.DirectoryLister.directoriesToHtmlSelectOptionTags() %>
+                <%= FilesystemHelper.DirectoryLister.directoriesToHtmlSelectOptionTags() %>
             </select>
             <br><br><br><br>
             <label for="file" class="input_file">Select a file</label>
@@ -89,7 +89,18 @@
 </div>
 <div class="div_main">
     <h1>Download!</h1>
-
+    <br>
+    <br>
+    <form action="down.do" method="get">
+        <br><br>
+        <label for="directory_file">Choose a directory</label>
+        <select id="directory_file" name="directory_file" class="input_select">
+            <%--        <%= FilesystemHelper.DirectoryLister.directoriesToHtmlSelectOptionTags() %>--%>
+            <%= FilesystemHelper.DirectoryLister.filesInDirectoriesToHtmlSelectOptionTags() %>
+        </select>
+        <br><br><br>
+        <input type="submit" class="input_submit">
+    </form>
 </div>
 </body>
 </html>
