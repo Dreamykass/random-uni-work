@@ -32,7 +32,40 @@
             android:layout_margin="20sp"
             android:orientation="vertical"
             tools:layout_editor_absoluteX="244dp"
-            tools:layout_editor_absoluteY="303dp" />
+            tools:layout_editor_absoluteY="303dp">
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="starting wrong guess n:" />
+
+            <EditText
+                android:id="@+id/editNumberFirst"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="number" />
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="wrong guess n decrease per level:" />
+
+            <EditText
+                android:id="@+id/editNumberDecrease"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="number" />
+
+            <Button
+                android:id="@+id/buttonStart"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="start" />
+        </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

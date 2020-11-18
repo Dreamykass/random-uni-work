@@ -71,7 +71,7 @@ public class LevelsLoader {
                     Level level = new Level();
                     level.title = element.getAttribute("name");
                     Log.e("aaa", "level: " + level.title);
-                    level.wrongGuesses = Integer.parseInt(element.getAttribute("wrong_guesses"));
+                    level.maxWrongGuesses = Integer.parseInt(element.getAttribute("wrong_guesses"));
 
                     NodeList pairs = element.getElementsByTagName("pair");
                     Log.e("aaa", "pairs len: " + pairs.getLength());
@@ -82,9 +82,10 @@ public class LevelsLoader {
                         String val = ((Element) node2).getAttribute("filename");
                         Log.e("aaa", "pair: " + val);
 
-                        level.pairs.add(node2.getNodeValue());
+                        level.pairs.add(val);
                     }
 
+                    Collections.shuffle(level.pairs);
                     levels.add(level);
                 }
             }
@@ -94,7 +95,6 @@ public class LevelsLoader {
             e.printStackTrace();
         }
 
-        Collections.shuffle(levels);
         return levels;
     }
 }

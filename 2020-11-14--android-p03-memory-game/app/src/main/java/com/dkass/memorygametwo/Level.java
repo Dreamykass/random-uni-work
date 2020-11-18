@@ -5,6 +5,6 @@ import java.util.List;
 
 public class Level {
     String title = "title";
-    Integer wrongGuesses = -1;
+    Integer maxWrongGuesses = -1;
     List<String> pairs = new ArrayList<>();
 }

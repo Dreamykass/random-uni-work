@@ -1,27 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
 <levels>
     <level
-        name="level 1"
-        wrong_guesses="10">
-        <pair filename="black.png" />
-        <pair filename="blue.png" />
-        <pair filename="green.png" />
-        <pair filename="orange.png" />
-        <pair filename="purple.png" />
-        <pair filename="red.png>" />
-        <pair filename="white.png" />
-        <pair filename="yellow.png" />
+        name="level 1 small"
+        wrong_guesses="99">
+        <pair filename="black" />
+        <pair filename="blue" />
+        <pair filename="green" />
     </level>
     <level
         name="level 2"
+        wrong_guesses="99">
+        <pair filename="black" />
+        <pair filename="blue" />
+        <pair filename="green" />
+        <pair filename="orange" />
+        <pair filename="purple" />
+        <pair filename="red" />
+        <pair filename="white" />
+        <pair filename="yellow" />
+    </level>
+    <level
+        name="level 3"
         wrong_guesses="10">
-        <pair filename="black.png" />
-        <pair filename="blue.png" />
-        <pair filename="green.png" />
-        <pair filename="orange.png" />
-        <pair filename="purple.png" />
-        <pair filename="red.png>" />
-        <pair filename="white.png" />
-        <pair filename="yellow.png" />
+        <pair filename="black" />
+        <pair filename="blue" />
+        <pair filename="green" />
+        <pair filename="orange" />
+        <pair filename="purple" />
+        <pair filename="red" />
+        <pair filename="white" />
+        <pair filename="yellow" />
     </level>
 </levels>
