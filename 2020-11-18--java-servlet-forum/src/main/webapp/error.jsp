@@ -76,33 +76,18 @@
 </head>
 <body>
 
-<form action="${pageContext.request.contextPath}/register_processing.jsp" method="post">
-    <div class="container">
-        <h1>Register</h1>
-        <p>Please fill in this form to create an account.</p>
-        <hr>
+<div class="container">
+    <h1>Error!</h1>
+    <p>
+        Error message: <%= request.getParameter("error")%>
+    </p>
 
-        <label for="email"><b>Email</b></label>
-        <input type="text" placeholder="Enter Email" name="email" id="email" required>
+</div>
 
-        <label for="login"><b>Login</b></label>
-        <input type="text" placeholder="Enter Login" name="login" id="login" required>
+<div class="container signin">
+    <p><a href="index.jsp">Go back to main page.</a></p>
 
-        <label for="password"><b>Password</b></label>
-        <input type="password" placeholder="Enter Password" name="password" id="password" required>
-
-        <label for="password-repeat"><b>Repeat Password</b></label>
-        <input type="password" placeholder="Repeat Password" name="password-repeat" id="password-repeat" required>
-        <hr>
-        <p>By creating an account you agree to our Terms & Privacy.</p>
-
-        <button type="submit" class="registerbtn">Register</button>
-    </div>
-
-    <div class="container signin">
-        <p>Already have an account? <a href="singin.jsp">Sign in</a>.</p>
-    </div>
-</form>
+</div>
 
 </body>
 </html>

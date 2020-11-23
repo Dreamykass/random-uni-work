@@ -76,14 +76,11 @@
 </head>
 <body>
 
-<form action="${pageContext.request.contextPath}/register_processing.jsp" method="post">
+<form action="${pageContext.request.contextPath}/login_processing.jsp" method="post">
     <div class="container">
         <h1>Register</h1>
         <p>Please fill in this form to create an account.</p>
         <hr>
-
-        <label for="email"><b>Email</b></label>
-        <input type="text" placeholder="Enter Email" name="email" id="email" required>
 
         <label for="login"><b>Login</b></label>
         <input type="text" placeholder="Enter Login" name="login" id="login" required>
@@ -91,16 +88,13 @@
         <label for="password"><b>Password</b></label>
         <input type="password" placeholder="Enter Password" name="password" id="password" required>
 
-        <label for="password-repeat"><b>Repeat Password</b></label>
-        <input type="password" placeholder="Repeat Password" name="password-repeat" id="password-repeat" required>
         <hr>
-        <p>By creating an account you agree to our Terms & Privacy.</p>
 
-        <button type="submit" class="registerbtn">Register</button>
+        <button type="submit" class="registerbtn">Singin</button>
     </div>
 
     <div class="container signin">
-        <p>Already have an account? <a href="singin.jsp">Sign in</a>.</p>
+        <p>Need an account? <a href="register.jsp">Register</a>.</p>
     </div>
 </form>
 
