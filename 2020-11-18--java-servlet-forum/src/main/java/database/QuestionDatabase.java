@@ -7,11 +7,12 @@ import java.beans.XMLEncoder;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
-public class PostBase {
+public class QuestionDatabase {
     private static final Lock questionsFileLock = new ReentrantLock();
 
     private static List<Question> getAllQuestionsNoLocking() throws FileNotFoundException {
@@ -32,7 +33,8 @@ public class PostBase {
 
         try {
             questions = getAllQuestionsNoLocking();
-        } catch (FileNotFoundException ignored) {
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
         questionsFileLock.unlock();
@@ -43,7 +45,12 @@ public class PostBase {
         questionsFileLock.lock();
 
         try {
-            List<Question> questions = getAllQuestionsNoLocking();
+            List<Question> questions = null;
+            questions = getAllQuestionsNoLocking();
+
+            if (questions == null)
+                questions = new ArrayList<>();
+
             questions.add(question);
 
             FileOutputStream fos = new FileOutputStream(Constants.DATABASE_ROOT + "questions.xml");
@@ -55,7 +62,8 @@ public class PostBase {
             questionsFileLock.unlock();
             return true;
 
-        } catch (Exception ignored) {
+        } catch (Exception e) {
+            e.printStackTrace();
             questionsFileLock.unlock();
             return false;
         }

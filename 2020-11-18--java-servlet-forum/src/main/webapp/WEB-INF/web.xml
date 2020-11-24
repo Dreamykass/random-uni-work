@@ -6,8 +6,17 @@
 
     <context-param>
         <param-name>default_visible_posts</param-name>
-        <param-value>10</param-value>
+        <param-value>2</param-value>
     </context-param>
+
+    <filter>
+        <filter-name>IPSavingFilter</filter-name>
+        <filter-class>servlet.IPSavingFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>IPSavingFilter</filter-name>
+        <url-pattern>/error.jsp</url-pattern>
+    </filter-mapping>
 
     <servlet>
         <servlet-name>RegisterProcessingServlet</servlet-name>

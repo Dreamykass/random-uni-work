@@ -1,6 +1,6 @@
 package servlet;
 
-import database.UserBase;
+import database.UserDatabase;
 import datatype.User;
 
 import javax.servlet.ServletException;
@@ -27,7 +27,7 @@ public class LoginProcessingServlet extends HttpServlet {
             return;
         }
 
-        List<User> users = UserBase.getAllUsers();
+        List<User> users = UserDatabase.getAllUsers();
 
         for (User user : users) {
             if (user.login.equals(login)) {

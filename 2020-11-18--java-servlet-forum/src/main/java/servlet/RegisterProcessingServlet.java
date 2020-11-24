@@ -1,6 +1,6 @@
 package servlet;
 
-import database.UserBase;
+import database.UserDatabase;
 import datatype.User;
 
 import javax.servlet.ServletException;
@@ -36,7 +36,7 @@ public class RegisterProcessingServlet extends HttpServlet {
 
         User user = new User(login, password, email);
 
-        if (UserBase.insertUserIfPossible(user)) {
+        if (UserDatabase.insertUserIfPossible(user)) {
             response.sendRedirect("index.jsp");
         } else {
             response.sendRedirect("error.jsp?error=fail");

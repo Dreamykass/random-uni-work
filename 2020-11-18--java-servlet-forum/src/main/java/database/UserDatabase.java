@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
-public class UserBase {
+public class UserDatabase {
     private static final Lock usersFileLock = new ReentrantLock();
 
     private static List<User> getAllUsersNoLocking() throws FileNotFoundException {
