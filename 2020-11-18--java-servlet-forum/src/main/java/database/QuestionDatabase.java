@@ -20,8 +20,12 @@ public class QuestionDatabase {
         FileInputStream fis = new FileInputStream(Constants.DATABASE_ROOT + "questions.xml");
         XMLDecoder xd = new XMLDecoder(fis);
 
-        @SuppressWarnings("unchecked")
-        List<Question> questions = (List<Question>) xd.readObject();
+        List<Question> questions = null;
+        try {
+            questions = (List<Question>) xd.readObject();
+        } catch (Exception ignored) {
+
+        }
         xd.close();
 
         return questions;
@@ -34,7 +38,7 @@ public class QuestionDatabase {
         try {
             questions = getAllQuestionsNoLocking();
         } catch (Exception e) {
-            e.printStackTrace();
+//            e.printStackTrace();
         }
 
         questionsFileLock.unlock();

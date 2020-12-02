@@ -12,14 +12,11 @@ public class Question implements Serializable {
     public Date dateOfCreation;
 
     public Question() {
-
     }
 
-    public Question(List<Answer> answers, String questionBody, String authorLogin, Date dateOfCreation) {
-        this.answers = answers;
-        this.questionBody = questionBody;
-        this.authorLogin = authorLogin;
-        this.dateOfCreation = dateOfCreation;
+    @Override
+    public int hashCode() {
+        return (int) dateOfCreation.getTime();
     }
 
 

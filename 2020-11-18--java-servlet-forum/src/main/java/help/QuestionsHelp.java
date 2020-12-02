@@ -4,18 +4,13 @@ import database.QuestionDatabase;
 import datatype.Question;
 
 import javax.servlet.ServletConfig;
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 public class QuestionsHelp {
-    public static String mainPageView(ServletConfig config) throws NoSuchFieldException {
+    public static String mainPageView(ServletConfig config) {
         StringBuilder str = new StringBuilder();
         int visiblePosts = Integer.parseInt(config.getServletContext().getInitParameter("default_visible_posts"));
-
-//        str.append("<div class=\"card\">");
-//        str.append("<h2>TITLE HEADING</h2>");
-//        str.append("<h5>Title description, Sep 2, 2017</h5>");
-//        str.append("<p>Some text..</p>");
-//        str.append("</div>");
 
         List<Question> questions = QuestionDatabase.getAllQuestions();
 
@@ -39,19 +34,25 @@ public class QuestionsHelp {
             }
         }
 
-//        for (int i = 0; i < 12; i++) {
-//            Random rr = new Random();
-//            Question qq = new Question();
-//            qq.authorLogin = "test";
-//            qq.dateOfCreation = new Date();
-//            qq.questionBody = "test";
-//            qq.answers = new ArrayList<>();
-//            if (!QuestionDatabase.insertQuestion(qq))
-//                throw new NoSuchFieldException("");
-//            str.append("a");
-//        }
+        return str.toString();
+    }
 
-        str.append("wtf");
+    public static String newQuestionForm(HttpServletRequest request) {
+        StringBuilder str = new StringBuilder();
+
+        if (!Session.getLoggedInUsernameOrGuest(request).equals("guest")) {
+            str.append("<form action='post_adding.jsp' method='post'>");
+
+            str.append("<div class=\"card\">");
+            str.append("<h2>Add new question:</h2><br>");
+            str.append("<label for='question_body'>Question body</label><br>");
+//            str.append("<input type='text' id='question_body' name='question_body'><br>");
+            str.append("<textarea name=\"question_body\" id='question_body' cols=\"40\" rows=\"5\"></textarea>\n");
+            str.append("<input type='submit' value='Submit'>");
+            str.append("</div>");
+
+            str.append("</form>");
+        }
 
         return str.toString();
     }

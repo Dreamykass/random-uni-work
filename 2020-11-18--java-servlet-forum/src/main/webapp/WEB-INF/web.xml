@@ -6,7 +6,7 @@
 
     <context-param>
         <param-name>default_visible_posts</param-name>
-        <param-value>2</param-value>
+        <param-value>10</param-value>
     </context-param>
 
     <filter>
@@ -34,6 +34,16 @@
     <servlet-mapping>
         <servlet-name>LoginProcessingServlet</servlet-name>
         <url-pattern>/login_processing.jsp</url-pattern>
+    </servlet-mapping>
+
+
+    <servlet>
+        <servlet-name>PostAddingServlet</servlet-name>
+        <servlet-class>servlet.PostAddingServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>PostAddingServlet</servlet-name>
+        <url-pattern>/post_adding.jsp</url-pattern>
     </servlet-mapping>
 
 

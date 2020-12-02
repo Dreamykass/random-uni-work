@@ -90,6 +90,7 @@
 <div class="row">
 
     <div class="leftcolumn">
+        <%= help.QuestionsHelp.newQuestionForm(request) %>
         <%= help.QuestionsHelp.mainPageView(getServletConfig()) %>
     </div>
 
