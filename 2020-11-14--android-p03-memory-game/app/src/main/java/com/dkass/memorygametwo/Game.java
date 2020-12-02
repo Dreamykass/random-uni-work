@@ -15,11 +15,12 @@ public class Game {
     public List<Card> cards = new ArrayList<>();
     public Integer wrongGuesses = 0;
     public TextView wrongGuessesView;
+    public TextView pointsView;
     public Button buttonNextLevel;
+    public Integer nicelyRevealedCards = 0;
     GameState state = GameState.NoneRevealed;
     Card firstCardTried;
     Card secondCardTried;
-    Integer nicelyRevealedCards = 0;
     Integer thisN;
     Integer decreaseN;
 
@@ -27,9 +28,10 @@ public class Game {
         return context.getResources().getIdentifier(str, "raw", context.getPackageName());
     }
 
-    private void updateWrongGuessesView() {
+    public void updateWrongGuessesView() {
         int i = level.maxWrongGuesses - wrongGuesses;
         wrongGuessesView.setText("remaining wrong guesses: " + Integer.toString(i));
+        pointsView.setText("points: " + (nicelyRevealedCards / 2));
     }
 
     public void processClick(Card card) {
@@ -62,6 +64,7 @@ public class Game {
             case TwoCardsRevealed: {
                 if (firstCardTried.imageStr.equals(secondCardTried.imageStr)) {
                     nicelyRevealedCards += 2;
+                    updateWrongGuessesView();
                 } else {
                     firstCardTried.imageButton.setImageResource(getIdFromFilename("hidden"));
                     secondCardTried.imageButton.setImageResource(getIdFromFilename("hidden"));

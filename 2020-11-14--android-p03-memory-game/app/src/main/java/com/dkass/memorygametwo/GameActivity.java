@@ -2,6 +2,7 @@ package com.dkass.memorygametwo;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
@@ -10,7 +11,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.dkass.memorygametwo.databinding.ActivityGameBinding;
 
-import java.util.Collections;
 import java.util.List;
 
 public class GameActivity extends AppCompatActivity {
@@ -58,15 +58,39 @@ public class GameActivity extends AppCompatActivity {
         binding.textViewWrongGuesses.setText("remaining wrong guesses: " + level.maxWrongGuesses.toString());
 
         Game game = new Game();
-        game.level = level;
-        game.wrongGuessesView = binding.textViewWrongGuesses;
-        game.context = this;
-        game.thisN = thisN;
-        game.decreaseN = decreaseN;
-        game.buttonNextLevel = binding.buttonNextLevel;
+        // --------------------------------------------------------------------------loading
+        if (getIntent().getBooleanExtra("loaded", false)) {
+            game.level = level;
+            game.wrongGuessesView = binding.textViewWrongGuesses;
+            game.context = this;
+            game.thisN = thisN;
+            game.decreaseN = decreaseN;
+            game.buttonNextLevel = binding.buttonNextLevel;
+            game.pointsView = binding.textViewPoints;
+
+
+            SharedPreferences sharedPref = this.getPreferences(Context.MODE_PRIVATE);
+
+            level.title = sharedPref.getString("level.title", "foo");
+            level.maxWrongGuesses = sharedPref.getInt("level.maxWrongGuesses", -1);
+            game.nicelyRevealedCards = sharedPref.getInt("game.nicelyRevealedCards", -19);
+
+            for (int i = 0; i < level.pairs.size(); i++) {
+                level.pairs.set(i, sharedPref.getString("level.pairs.get(" + i + ")", "xxx"));
+            }
+        } else {
+            game.level = level;
+            game.wrongGuessesView = binding.textViewWrongGuesses;
+            game.context = this;
+            game.thisN = thisN;
+            game.decreaseN = decreaseN;
+            game.buttonNextLevel = binding.buttonNextLevel;
+            game.pointsView = binding.textViewPoints;
+        }
+        // --------------------------------------------------------------------------loading
 
         for (int i = 0; i < 2; i++) {
-            Collections.shuffle(level.pairs);
+//            Collections.shuffle(level.pairs);
             for (String pair : level.pairs) {
                 {
                     ImageButton button = new ImageButton(this);
@@ -84,6 +108,19 @@ public class GameActivity extends AppCompatActivity {
             }
         }
 
+        if (getIntent().getBooleanExtra("loaded", false)) {
+            SharedPreferences sharedPref = this.getPreferences(Context.MODE_PRIVATE);
+
+            for (int i = 0; i < game.cards.size(); i++) {
+                game.cards.get(i).revealed = sharedPref.getBoolean("game.cards.get(" + i + ").revealed",
+                        true);
+                if (game.cards.get(i).revealed)
+                    game.cards.get(i).imageButton.setImageResource(
+                            getIdFromFilename(game.cards.get(i).imageStr)
+                    );
+            }
+        }
+
 //        binding.gridLayout.setOnClickListener((View v) -> game.processClick(null));
         binding.buttonNextLevel.setOnClickListener((View v) -> {
             Intent intent = new Intent(GameActivity.this, GameActivity.class);
@@ -94,5 +131,32 @@ public class GameActivity extends AppCompatActivity {
         });
 
         binding.buttonNextLevel.setVisibility(View.GONE);
+
+        binding.buttonSaveAndQuit.setOnClickListener((View v) -> {
+            SharedPreferences sharedPref = GameActivity.this.getPreferences(Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = sharedPref.edit();
+
+            editor.putInt("thisN", thisN);
+            editor.putInt("decreaseN", decreaseN);
+            editor.putString("level.title", level.title);
+            editor.putInt("level.maxWrongGuesses", level.maxWrongGuesses);
+            editor.putInt("game.nicelyRevealedCards", game.nicelyRevealedCards);
+
+            for (int i = 0; i < level.pairs.size(); i++) {
+                editor.putString("level.pairs.get(" + i + ")", level.pairs.get(i));
+            }
+
+            for (int i = 0; i < game.cards.size(); i++) {
+                editor.putBoolean("game.cards.get(" + i + ").revealed",
+                        game.cards.get(i).revealed);
+            }
+
+            editor.apply();
+
+            finish();
+        });
+
+        game.updateWrongGuessesView();
+
     }
 }

@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.text.InputType;
+import android.util.Pair;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -26,11 +27,13 @@ public class GameActivity extends AppCompatActivity {
     List<Letter> lettersVowels = new ArrayList<>();
     List<Word> words = new ArrayList<>();
     String answer;
+    String category;
     ActivityGameBinding binding;
     Wheel wheel = new Wheel();
     Boolean finished = false;
     Boolean finishedToastShown = false;
     String inputFromAlert = "";
+    Integer possibleMoneyToBeChanged;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,8 +42,10 @@ public class GameActivity extends AppCompatActivity {
         View view = binding.getRoot();
         setContentView(view);
 
-
-        answer = AnswerService.getAnswer();
+        Pair<String, String> pp = AnswerService.getAnswer();
+        answer = pp.second;
+        category = pp.first;
+        binding.textCategory.setText(category);
         state = State.Idle;
 
 
@@ -127,6 +132,8 @@ public class GameActivity extends AppCompatActivity {
             if (inputFromAlert.equalsIgnoreCase(answer)) {
                 toast("You have won!!! Your final money was: " + money + "$.");
                 finishedToastShown = true;
+                for (Word ww : words)
+                    ww.button.setText(ww.value);
             } else {
                 toast("You took a wrong guess and lost... Your final money was: " + money + "$.");
                 finishedToastShown = true;
@@ -160,6 +167,8 @@ public class GameActivity extends AppCompatActivity {
 
             state = State.Idle;
         } else if (state == State.ChoosingAConsonant && !letter.revealed) {
+            boolean revealedSomething = false;
+
             letter.revealed = true;
             for (Letter v : lettersConsonants)
                 v.button.setEnabled(false);
@@ -169,8 +178,12 @@ public class GameActivity extends AppCompatActivity {
                 if (word.value.equals(letter.value)) {
                     word.revealed = true;
                     word.button.setText(word.value);
+                    revealedSomething = true;
                 }
             }
+
+            if (revealedSomething)
+                money += possibleMoneyToBeChanged;
 
             state = State.Idle;
         }
@@ -214,7 +227,8 @@ public class GameActivity extends AppCompatActivity {
                 @Override
                 public void run() {
                     int change = wheel.items.get(wheel.currentItem);
-                    money += change;
+//                    money += change;
+                    possibleMoneyToBeChanged = change;
 
                     for (Letter letter : lettersConsonants) {
                         letter.button.setEnabled(true);

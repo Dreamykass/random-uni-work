@@ -1,7 +1,9 @@
 package com.dkass.memorygametwo;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 
@@ -42,7 +44,24 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(MainActivity.this, GameActivity.class);
             intent.putExtra("thisN", Integer.toString(startingN));
             intent.putExtra("decreaseN", Integer.toString(decreaseN));
+            intent.putExtra("loaded", false);
             MainActivity.this.startActivity(intent);
+        });
+
+        binding.buttonLoad.setOnClickListener((View v) -> {
+            int startingN = Integer.parseInt(binding.editNumberFirst.getText().toString());
+            int decreaseN = Integer.parseInt(binding.editNumberDecrease.getText().toString());
+
+            SharedPreferences sharedPref = this.getPreferences(Context.MODE_PRIVATE);
+
+            Intent intent = new Intent(MainActivity.this, GameActivity.class);
+            intent.putExtra("thisN",
+                    Integer.toString(sharedPref.getInt("thisN", -1)));
+            intent.putExtra("decreaseN",
+                    Integer.toString(sharedPref.getInt("decreaseN", -1)));
+            intent.putExtra("loaded", true);
+            MainActivity.this.startActivity(intent);
+
         });
 
     }
