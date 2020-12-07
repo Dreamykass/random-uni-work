@@ -34,6 +34,7 @@ public class LoginProcessingServlet extends HttpServlet {
                 if (user.password.equals(password)) {
                     request.getSession().setAttribute("login", login);
                     response.sendRedirect("index.jsp");
+                    CountUserListener.increment(getServletContext(), request);
                     return;
                 } else {
                     response.sendRedirect("error.jsp?error=wrongpassword");

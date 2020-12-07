@@ -18,7 +18,7 @@
         body {
             font-family: Arial;
             padding: 20px;
-            background: <%= session.getAttribute("browser") %>;
+            background: #f1f1f1;
         }
 
         /* Header/Blog Title */
@@ -85,27 +85,20 @@
 
 <div class="header">
     <h2>Questions and Answers</h2>
-    <h6><a href="index.jsp">Main Page</a></h6>
 </div>
 
 <div class="row">
 
     <div class="leftcolumn">
-        <%= help.QuestionsHelp.newQuestionForm(request) %>
-        <%= help.QuestionsHelp.mainPageView(getServletConfig(), request) %>
+        <%--        <%= help.QuestionsHelp.newQuestionForm(request) %>--%>
+        <%--        <%= help.QuestionsHelp.mainPageView(getServletConfig()) %>--%>
+        <%= help.QuestionsHelp.questionDetailsView(request) %>
     </div>
 
 
     <div class="rightcolumn">
         <div class="card">
             <%= help.Session.getGreeting(request) %>
-        </div>
-        <div class="card">
-            <h2>Current and total users</h2>
-            <p>
-                total: <%= request.getServletContext().getAttribute("totalusers") %><br>
-                current: <%= request.getServletContext().getAttribute("currentusers") %><br>
-            </p>
         </div>
         <div class="card">
             <h2>About The Page</h2>

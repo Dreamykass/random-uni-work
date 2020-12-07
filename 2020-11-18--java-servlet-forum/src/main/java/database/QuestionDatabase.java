@@ -45,7 +45,7 @@ public class QuestionDatabase {
         return questions;
     }
 
-    public static Boolean insertQuestion(Question question) {
+    public static void insertQuestion(Question question) {
         questionsFileLock.lock();
 
         try {
@@ -64,12 +64,42 @@ public class QuestionDatabase {
             xe.close();
 
             questionsFileLock.unlock();
-            return true;
 
         } catch (Exception e) {
             e.printStackTrace();
             questionsFileLock.unlock();
-            return false;
+        }
+    }
+
+    public static void updateQuestion(Question question) {
+        questionsFileLock.lock();
+
+        try {
+            List<Question> questions = null;
+            questions = getAllQuestionsNoLocking();
+
+            if (questions == null)
+                questions = new ArrayList<>();
+
+            for (Question qq : questions) {
+                if (qq.hashCode() == question.hashCode()) {
+                    questions.remove(qq);
+                    questions.add(question);
+                    break;
+                }
+            }
+
+            FileOutputStream fos = new FileOutputStream(Constants.DATABASE_ROOT + "questions.xml");
+            XMLEncoder xe = new XMLEncoder(fos);
+
+            xe.writeObject(questions);
+            xe.close();
+
+            questionsFileLock.unlock();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            questionsFileLock.unlock();
         }
     }
 }

@@ -6,7 +6,7 @@
 
     <context-param>
         <param-name>default_visible_posts</param-name>
-        <param-value>10</param-value>
+        <param-value>25</param-value>
     </context-param>
 
     <filter>
@@ -16,6 +16,15 @@
     <filter-mapping>
         <filter-name>IPSavingFilter</filter-name>
         <url-pattern>/error.jsp</url-pattern>
+    </filter-mapping>
+
+    <filter>
+        <filter-name>BrowserFilter</filter-name>
+        <filter-class>servlet.BrowserFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>BrowserFilter</filter-name>
+        <url-pattern>/index.jsp</url-pattern>
     </filter-mapping>
 
     <servlet>
@@ -44,6 +53,15 @@
     <servlet-mapping>
         <servlet-name>PostAddingServlet</servlet-name>
         <url-pattern>/post_adding.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>AnswerAddingServlet</servlet-name>
+        <servlet-class>servlet.AnswerAddingServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AnswerAddingServlet</servlet-name>
+        <url-pattern>/answer_adding.jsp</url-pattern>
     </servlet-mapping>
 
 

@@ -1,5 +1,7 @@
 package help;
 
+import servlet.CountUserListener;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -34,6 +36,7 @@ public class Session {
 
     public static String logoutAndRedirect(HttpServletRequest request, HttpServletResponse response) throws IOException {
         request.getSession().removeAttribute("login");
+        CountUserListener.decrement(request.getServletContext(), request);
         response.sendRedirect("index.jsp");
         return "";
     }
