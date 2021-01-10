@@ -20,6 +20,7 @@ import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -95,61 +96,99 @@ public class MainActivity extends AppCompatActivity {
                             Location currentLocation = location2;
                             List<LocationStuff.MyLocation> locations = LocationStuff.getAllLocations(MainActivity.this);
 
-                            locations.sort(
-                                    (LocationStuff.MyLocation a, LocationStuff.MyLocation b) -> {
-                                        float[] results1 = new float[3];
-                                        float[] results2 = new float[3];
+                            RequestQueue queue = Volley.newRequestQueue(MainActivity.this);
+                            String url = "http://192.168.0.143:8080/uaua";
+                            JsonObjectRequest request = new JsonObjectRequest(url, null,
+                                    new Response.Listener<JSONObject>() {
+                                        @Override
+                                        public void onResponse(JSONObject response) {
+                                            if (null != response) {
+                                                try {
+                                                    JSONArray arr = response.getJSONArray("arr");
+                                                    
+                                                    for (int i = 0; i < arr.length(); i++) {
+                                                        String[] parts = arr.getString(i).split(",");
 
-                                        Location.distanceBetween(a.latitude, a.longitude, currentLocation.getLatitude(), currentLocation.getLongitude(), results1);
-                                        Location.distanceBetween(b.latitude, b.longitude, currentLocation.getLatitude(), currentLocation.getLongitude(), results2);
+                                                        LocationStuff.MyLocation m = new LocationStuff.MyLocation();
+                                                        m.latitude = Double.parseDouble(parts[0]);
+                                                        m.longitude = Double.parseDouble(parts[1]);
+                                                        m.name = "from the server: " + parts[2];
+                                                        m.description = parts[3];
+                                                        locations.add(m);
+                                                    }
 
-                                        return Double.compare(
-                                                results1[0],
-                                                results2[0]
-                                        );
-                                    });
 
-                            LocationStuff.MyLocation closest = locations.get(0);
-                            float[] closestDistanceArr = new float[3];
-                            Location.distanceBetween(closest.latitude, closest.longitude, currentLocation.getLatitude(), currentLocation.getLongitude(), closestDistanceArr);
-                            float closestDistance = closestDistanceArr[0];
+                                                    locations.sort(
+                                                            (LocationStuff.MyLocation a, LocationStuff.MyLocation b) -> {
+                                                                float[] results1 = new float[3];
+                                                                float[] results2 = new float[3];
 
-                            if (closestDistance < Double.parseDouble(binding.editNumberDistance.getText().toString())) {
-                                binding.textLocationName.setText(closest.name);
-                                if (closest.description.isEmpty()) {
+                                                                Location.distanceBetween(a.latitude, a.longitude, currentLocation.getLatitude(), currentLocation.getLongitude(), results1);
+                                                                Location.distanceBetween(b.latitude, b.longitude, currentLocation.getLatitude(), currentLocation.getLongitude(), results2);
+
+                                                                return Double.compare(
+                                                                        results1[0],
+                                                                        results2[0]
+                                                                );
+                                                            });
+
+                                                    LocationStuff.MyLocation closest = locations.get(0);
+                                                    float[] closestDistanceArr = new float[3];
+                                                    Location.distanceBetween(closest.latitude, closest.longitude, currentLocation.getLatitude(), currentLocation.getLongitude(), closestDistanceArr);
+                                                    float closestDistance = closestDistanceArr[0];
+
+                                                    if (closestDistance < Double.parseDouble(binding.editNumberDistance.getText().toString())) {
+                                                        binding.textLocationName.setText(closest.name);
+                                                        if (closest.description.isEmpty()) {
 //                                    binding.textLocationDescription.setText(getDescriptionFromInternets(closest.name));
-                                    getDescriptionFromInternets(closest.name, binding.textLocationDescription);
-                                } else {
-                                    binding.textLocationDescription.setText(closest.description);
+                                                            getDescriptionFromInternets(closest.name, binding.textLocationDescription);
+                                                        } else {
+                                                            binding.textLocationDescription.setText(closest.description);
+                                                        }
+                                                    } else {
+                                                        binding.textLocationName.setText("nothing too close :(");
+                                                        binding.textLocationDescription.setText("closest was this far: " + closestDistance);
+                                                    }
+
+                                                    // ===================================================================================== list
+                                                    {
+                                                        List<String> values = new ArrayList<>();
+
+                                                        for (LocationStuff.MyLocation myLocation : locations) {
+                                                            float[] c = new float[3];
+                                                            Location.distanceBetween(myLocation.latitude, myLocation.longitude,
+                                                                    currentLocation.getLatitude(), currentLocation.getLongitude(),
+                                                                    c);
+
+                                                            if (c[0] < Double.parseDouble(binding.editNumberDistance.getText().toString()))
+                                                                values.add(myLocation.name + " (" + myLocation.description + ")");
+
+                                                        }
+
+                                                        String[] valuesArr = new String[values.size()];
+                                                        values.toArray(valuesArr);
+
+                                                        ArrayAdapter<String> adapter = new ArrayAdapter<String>(MainActivity.this,
+                                                                android.R.layout.simple_list_item_1, android.R.id.text1, valuesArr);
+                                                        binding.list.setAdapter(adapter);
+                                                    }
+                                                    // ===================================================================================
+
+                                                } catch (JSONException e) {
+
+                                                }
+                                            } else {
+                                            }
+
+                                        }
+                                    }, new Response.ErrorListener() {
+
+                                @Override
+                                public void onErrorResponse(VolleyError error) {
                                 }
-                            } else {
-                                binding.textLocationName.setText("nothing too close :(");
-                                binding.textLocationDescription.setText("closest was this far: " + closestDistance);
-                            }
-
-                            // ===================================================================================== list
-                            {
-                                List<String> values = new ArrayList<>();
-
-                                for (LocationStuff.MyLocation myLocation : locations) {
-                                    float[] c = new float[3];
-                                    Location.distanceBetween(myLocation.latitude, myLocation.longitude,
-                                            currentLocation.getLatitude(), currentLocation.getLongitude(),
-                                            c);
-
-                                    if (c[0] < Double.parseDouble(binding.editNumberDistance.getText().toString()))
-                                        values.add(myLocation.name + " (" + myLocation.description + ")");
-
-                                }
-
-                                String[] valuesArr = new String[values.size()];
-                                values.toArray(valuesArr);
-
-                                ArrayAdapter<String> adapter = new ArrayAdapter<String>(MainActivity.this,
-                                        android.R.layout.simple_list_item_1, android.R.id.text1, valuesArr);
-                                binding.list.setAdapter(adapter);
-                            }
-                            // ===================================================================================
+                            });
+                            queue.add(request);
+                            queue.start();
                         }
 //                        binding.textViewCurrent2.setText("suck wtf");
                     }

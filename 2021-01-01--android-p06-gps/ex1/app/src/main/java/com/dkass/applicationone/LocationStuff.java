@@ -5,17 +5,12 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.android.volley.RequestQueue;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.RequestFuture;
 import com.android.volley.toolbox.Volley;
-
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.ExecutionException;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class LocationStuff {
@@ -128,19 +123,6 @@ public class LocationStuff {
 
         queue.stop();*/
 
-        RequestFuture<JSONObject> future = RequestFuture.newFuture();
-        JsonObjectRequest request = new JsonObjectRequest(url, null, future, future);
-        queue.add(request);
-        queue.start();
-
-        try {
-            JSONObject response = future.get(); // this will block
-        } catch (InterruptedException e) {
-            // exception handling
-        } catch (ExecutionException e) {
-            // exception handling
-        }
-
         MyLocation m = new MyLocation();
         m.latitude = 50.319139334568966;
         m.longitude = 17.3773578438666;
@@ -172,8 +154,8 @@ public class LocationStuff {
         }
         cursor.close();
 
-        List<MyLocation> external = getLocationsFromServer(context);
-        list.addAll(external);
+//        List<MyLocation> external = getLocationsFromServer(context);
+//        list.addAll(external);
 
         Collections.shuffle(list);
         return list;
