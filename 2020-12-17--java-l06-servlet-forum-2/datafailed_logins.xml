@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<java version="1.8.0_181" class="java.beans.XMLDecoder">
+ <object class="datatype.FailedLogin" id="FailedLogin0">
+  <void class="datatype.FailedLogin" method="getField">
+   <string>date</string>
+   <void method="set">
+    <object idref="FailedLogin0"/>
+    <object class="java.util.Date">
+     <long>1609966249248</long>
+    </object>
+   </void>
+  </void>
+  <void class="datatype.FailedLogin" method="getField">
+   <string>address</string>
+   <void method="set">
+    <object idref="FailedLogin0"/>
+    <string>0:0:0:0:0:0:0:1</string>
+   </void>
+  </void>
+ </object>
+</java>
