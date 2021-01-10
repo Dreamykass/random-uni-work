@@ -4,9 +4,9 @@ import android.annotation.SuppressLint;
 import android.location.Location;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.volley.RequestQueue;
@@ -17,15 +17,13 @@ import com.android.volley.toolbox.Volley;
 import com.dkass.applicationone.databinding.ActivityMainBinding;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
-import com.google.android.gms.tasks.OnCanceledListener;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
@@ -49,10 +47,10 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    String getDescriptionFromInternets(String name, TextView textView) {
+    void getDescriptionFromInternets(String name, TextView textView) {
 
-        RequestQueue queue = Volley.newRequestQueue(this);
-        String url = "http://192.168.0.143:8080/uaua?name=" + name;
+        RequestQueue queue = Volley.newRequestQueue(MainActivity.this);
+        String url = "http://192.168.0.143:8080/uaua";
         JsonObjectRequest request = new JsonObjectRequest(url, null,
                 new Response.Listener<JSONObject>() {
                     @Override
@@ -77,8 +75,6 @@ public class MainActivity extends AppCompatActivity {
         });
         queue.add(request);
         queue.start();
-
-        return "ayy";
     }
 
     @SuppressLint("MissingPermission")
@@ -97,19 +93,19 @@ public class MainActivity extends AppCompatActivity {
                             binding.textViewCurrent2.setText("Longitude = " + Double.toString(location2.getLongitude()));
 
                             Location currentLocation = location2;
-                            List<LocationStuff.MyLocation> locations = LocationStuff.getAllLocations();
+                            List<LocationStuff.MyLocation> locations = LocationStuff.getAllLocations(MainActivity.this);
 
                             locations.sort(
                                     (LocationStuff.MyLocation a, LocationStuff.MyLocation b) -> {
                                         float[] results1 = new float[3];
                                         float[] results2 = new float[3];
 
-                                        Location.distanceBetween(b.latitude, b.longitude, currentLocation.getLatitude(), currentLocation.getLongitude(), results1);
+                                        Location.distanceBetween(a.latitude, a.longitude, currentLocation.getLatitude(), currentLocation.getLongitude(), results1);
                                         Location.distanceBetween(b.latitude, b.longitude, currentLocation.getLatitude(), currentLocation.getLongitude(), results2);
 
                                         return Double.compare(
                                                 results1[0],
-                                                results2[1]
+                                                results2[0]
                                         );
                                     });
 
@@ -130,26 +126,32 @@ public class MainActivity extends AppCompatActivity {
                                 binding.textLocationName.setText("nothing too close :(");
                                 binding.textLocationDescription.setText("closest was this far: " + closestDistance);
                             }
+
+                            // ===================================================================================== list
+                            {
+                                List<String> values = new ArrayList<>();
+
+                                for (LocationStuff.MyLocation myLocation : locations) {
+                                    float[] c = new float[3];
+                                    Location.distanceBetween(myLocation.latitude, myLocation.longitude,
+                                            currentLocation.getLatitude(), currentLocation.getLongitude(),
+                                            c);
+
+                                    if (c[0] < Double.parseDouble(binding.editNumberDistance.getText().toString()))
+                                        values.add(myLocation.name + " (" + myLocation.description + ")");
+
+                                }
+
+                                String[] valuesArr = new String[values.size()];
+                                values.toArray(valuesArr);
+
+                                ArrayAdapter<String> adapter = new ArrayAdapter<String>(MainActivity.this,
+                                        android.R.layout.simple_list_item_1, android.R.id.text1, valuesArr);
+                                binding.list.setAdapter(adapter);
+                            }
+                            // ===================================================================================
                         }
-//                        binding.textViewCurrent2.setText("succ wtf");
-                    }
-                }).addOnCompleteListener(this, new OnCompleteListener<Location>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Location> task) {
-//                        binding.textViewCurrent1.setText("Complete wtf");
-//                        Location location2 = task.getResult();
-//                        binding.textViewCurrent1.setText("Latitude = " + Double.toString(location2.getLatitude()));
-//                        binding.textViewCurrent2.setText("Longitude = " + Double.toString(location2.getLongitude()));
-                    }
-                }).addOnFailureListener(this, new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-//                        binding.textViewCurrent1.setText("fail wtf");
-                    }
-                }).addOnCanceledListener(this, new OnCanceledListener() {
-                    @Override
-                    public void onCanceled() {
-//                        binding.textViewCurrent2.setText("canceled wtf");
+//                        binding.textViewCurrent2.setText("suck wtf");
                     }
                 });
 
