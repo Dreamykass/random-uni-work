@@ -4,15 +4,146 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/background"
     tools:context=".MainActivity">
 
-    <TextView
+    <Button
+        android:id="@+id/buttonOK"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
+        android:background="#8A3636"
+        android:backgroundTint="#531A1A"
+        android:text="OK"
+        app:layout_constraintEnd_toEndOf="@+id/editTextCity"
+        app:layout_constraintTop_toBottomOf="@+id/editTextCity" />
+
+    <EditText
+        android:id="@+id/editTextCity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="city"
+        android:textColor="#000000"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/textViewWeather"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="320dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:textColor="#FFFFFF"
+        app:layout_constraintEnd_toEndOf="@+id/editTextCity"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/editTextCity"
+        app:layout_constraintTop_toBottomOf="@+id/editTextCity" />
+
+    <CheckBox
+        android:id="@+id/checkBoxNextDay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="next day"
+        android:textColor="#000000"
+        app:layout_constraintStart_toStartOf="@+id/editTextCity"
+        app:layout_constraintTop_toBottomOf="@+id/editTextCity" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="weather"
+        android:textColor="#FFFFFF"
+        app:layout_constraintBottom_toTopOf="@+id/textViewWeather"
+        app:layout_constraintStart_toStartOf="@+id/textViewWeather" />
+
+    <EditText
+        android:id="@+id/textViewTemperature"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="64dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:textColor="#FFFFFF"
+        app:layout_constraintEnd_toEndOf="@+id/textViewWeather"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/textViewWeather"
+        app:layout_constraintTop_toBottomOf="@+id/textViewWeather" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="️temperature"
+        android:textColor="#FFFFFF"
+        app:layout_constraintBottom_toTopOf="@+id/textViewTemperature"
+        app:layout_constraintStart_toStartOf="@+id/textViewTemperature" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="humidity"
+        android:textColor="#FFFFFF"
+        app:layout_constraintBottom_toTopOf="@+id/textViewHumidity"
+        app:layout_constraintStart_toStartOf="@+id/textViewHumidity" />
+
+    <EditText
+        android:id="@+id/textViewHumidity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="64dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:textColor="#FFFFFF"
+        app:layout_constraintEnd_toEndOf="@+id/textViewTemperature"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/textViewTemperature"
+        app:layout_constraintTop_toBottomOf="@+id/textViewTemperature" />
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="🌡️"
+        android:textSize="50sp"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewTemperature"
+        app:layout_constraintEnd_toStartOf="@+id/textViewTemperature"
+        app:layout_constraintTop_toTopOf="@+id/textView3" />
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="💦"
+        android:textSize="50sp"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewHumidity"
+        app:layout_constraintEnd_toStartOf="@+id/textViewHumidity"
+        app:layout_constraintTop_toTopOf="@+id/textView4" />
+
+    <TextView
+        android:id="@+id/textViewIcon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="🌨️"
+        android:textSize="50sp"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewWeather"
+        app:layout_constraintEnd_toStartOf="@+id/textViewWeather"
+        app:layout_constraintTop_toTopOf="@+id/textView2" />
+
+    <TextView
+        android:id="@+id/textView8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="🏙️"
+        android:textSize="50sp"
+        app:layout_constraintBottom_toBottomOf="@+id/checkBoxNextDay"
+        app:layout_constraintEnd_toStartOf="@+id/editTextCity"
+        app:layout_constraintTop_toTopOf="@+id/editTextCity" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

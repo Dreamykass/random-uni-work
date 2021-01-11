@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">My Application</string>
+    <string-array name="waluty">
+        <item>Euro</item>
+        <item>Dolar</item>
+        <item>Funt brytyjski</item>
+    </string-array>
+</resources>
