@@ -1,5 +1,6 @@
 package help;
 
+import database.UserDatabase;
 import servlet.CountUserListener;
 
 import javax.servlet.http.HttpServletRequest;
@@ -51,6 +52,9 @@ public class Session {
             greeting.append("<a href=\"user_questions.jsp?user=").append(loginOrGuest).append("\">My questions.</a><br>");
             greeting.append("<a href=\"user_answers.jsp?user=").append(loginOrGuest).append("\">My answers.</a><br>");
         }
+
+        greeting.append("<br><br><br>");
+        greeting.append(UserDatabase.errors);
 
         return greeting.toString();
     }

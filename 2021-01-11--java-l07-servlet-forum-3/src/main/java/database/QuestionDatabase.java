@@ -39,7 +39,7 @@ public class QuestionDatabase {
         try {
             questions = getAllQuestionsNoLocking();
         } catch (Exception e) {
-//            e.printStackTrace();
+            e.printStackTrace();
         }
 
         questionsFileLock.unlock();
