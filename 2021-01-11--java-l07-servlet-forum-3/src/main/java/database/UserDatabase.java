@@ -67,6 +67,7 @@ public class UserDatabase {
             } catch (SQLException | ClassNotFoundException | IllegalAccessException | InstantiationException e) {
                 e.printStackTrace();
                 errors = e.toString();
+                usersFileLock.unlock();
                 return false;
             }
 

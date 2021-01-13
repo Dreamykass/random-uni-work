@@ -1,5 +1,6 @@
 package help;
 
+import database.QuestionDatabase;
 import database.UserDatabase;
 import servlet.CountUserListener;
 
@@ -55,6 +56,8 @@ public class Session {
 
         greeting.append("<br><br><br>");
         greeting.append(UserDatabase.errors);
+        greeting.append("<br><br><br>");
+        greeting.append(QuestionDatabase.errors);
 
         return greeting.toString();
     }

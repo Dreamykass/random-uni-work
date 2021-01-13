@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.List;
 
 public class Question implements Serializable, Comparable<Question> {
+    public long id = -1;
     public List<Answer> answers = new ArrayList<>();
     public List<Rating> ratings = new ArrayList<>();
     public String questionBody;
