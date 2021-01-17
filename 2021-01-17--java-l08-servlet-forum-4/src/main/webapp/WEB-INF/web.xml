@@ -73,5 +73,23 @@
         <url-pattern>/rating.jsp</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>UserTypeChangingServlet</servlet-name>
+        <servlet-class>servlet.UserTypeChangingServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>UserTypeChangingServlet</servlet-name>
+        <url-pattern>/user_type_changing.jsp</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>UserPasswordChangingServlet</servlet-name>
+        <servlet-class>servlet.UserPasswordChangingServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>UserPasswordChangingServlet</servlet-name>
+        <url-pattern>/user_password_changing.jsp</url-pattern>
+    </servlet-mapping>
+
 
 </web-app>

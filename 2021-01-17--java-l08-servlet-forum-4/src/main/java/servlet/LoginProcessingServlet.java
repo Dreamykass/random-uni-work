@@ -33,6 +33,7 @@ public class LoginProcessingServlet extends HttpServlet {
             if (user.login.equals(login)) {
                 if (user.password.equals(password)) {
                     request.getSession().setAttribute("login", login);
+                    request.getSession().setAttribute("type", user.type);
                     response.sendRedirect("index.jsp");
                     CountUserListener.increment(getServletContext(), request);
                 } else {
