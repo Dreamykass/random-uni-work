@@ -63,6 +63,7 @@ public class Session {
             greeting.append("<a href=\"user_answers.jsp?user=").append(loginOrGuest).append("\">My answers.</a><br>");
             greeting.append("<br>");
             greeting.append("<a href=\"admin_panel.jsp?user=").append(loginOrGuest).append("\">MY ADMIN PANEL.</a><br>");
+            greeting.append("<a href=\"admin_panel2.xhtml?user=").append(loginOrGuest).append("\">MY ADMIN PANEL (jsf).</a><br>");
         } else {
             greeting.append("<a href=\"user.jsp?user=").append(loginOrGuest).append("\">My account.</a><br>");
             greeting.append("<a href=\"user_questions.jsp?user=").append(loginOrGuest).append("\">My questions.</a><br>");

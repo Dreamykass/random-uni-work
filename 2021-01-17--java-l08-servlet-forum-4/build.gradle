@@ -6,6 +6,9 @@ plugins {
 group 'com.dkass'
 version 'SNAPSHOT'
 
+//apply plugin: 'java-library'
+//apply plugin: 'war'
+
 repositories {
     mavenCentral()
 }
@@ -26,6 +29,30 @@ dependencies {
     implementation("jstl:jstl:1.2")
     implementation("mysql:mysql-connector-java:5.1.46")
     compile "mysql:mysql-connector-java:5.1.46"
+
+    compile 'com.sun.faces:jsf-api:2.2.5'
+    compile 'com.sun.faces:jsf-impl:2.2.5'
+
+    implementation 'org.glassfish:javax.faces:2.2.16'
+
+
+//    //Jersey
+//    compile 'org.glassfish.jersey.containers:jersey-container-servlet:2.26'
+//    compile 'org.glassfish.jersey.inject:jersey-hk2:2.26'
+//    compile 'org.glassfish.jersey.core:jersey-common:2.26'
+//
+//    //JAXB
+//    compile 'org.glassfish.jersey.media:jersey-media-json-jackson:2.26'
+//
+//    //Javax Servlet
+//    compile 'javax.servlet:javax.servlet-api:3.0.1'
+//
+//    //JSF
+//    compile 'org.glassfish:javax.faces:2.2.16'
+//
+//    compile 'javax.inject:javax.inject:1'
+//
+//    compile 'org.glassfish.jersey.containers:jersey-container-servlet:2.25.1'
 
 }
 
