@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:minWidth="25px"
+    android:minHeight="25px"
+    >
+
+    <android.support.design.widget.AppBarLayout
+        android:minWidth="25px"
+        android:minHeight="25px"
+        android:layout_width="match_parent"
+        android:layout_height="56.5dp"
+        android:id="@+id/appBarLayout1" />
+
+    <android.support.design.bottomappbar.BottomAppBar
+        android:minWidth="25px"
+        android:minHeight="25px"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:foregroundGravity="bottom"
+        android:id="@+id/bottomAppBar"
+        android:backgroundTint="?android:attr/colorPrimary"
+        >
+
+        <TextView
+            android:text="Medium Text\nfoo"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/white"
+            android:id="@+id/textViewTop" />
+
+    </android.support.design.bottomappbar.BottomAppBar>
+
+    <GridLayout
+        android:minWidth="100px"
+        android:minHeight="100px"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:rowCount="8"
+        android:columnCount="8"
+        android:id="@+id/gridLayoutMap" />
+    <TextView
+        android:text=" "
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textViewDebug" />
+    <ToggleButton
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/toggleButton1"
+        android:textOn="Click to stop removing pawns"
+        android:textOff="Click to remove pawns"
+        />
+
+    <Button
+        android:text="END GAME"
+        android:layout_width="200px"
+        android:layout_height="200px"
+        android:id="@+id/buttonEndGame"
+        android:layout_marginRight="158.5dp"
+        android:layout_marginTop="20.5dp"
+        android:layout_marginBottom="82.5dp"
+        android:layout_marginLeft="126.0dp" />
+
+</LinearLayout>
