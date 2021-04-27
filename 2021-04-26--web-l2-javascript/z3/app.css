@@ -1,0 +1,29 @@
+body { font-family: sans-serif; }
+.board {
+    /* margin-left:700px;
+    margin-top: 300px; */
+    /* width: 306px; */
+    height:100%;
+    background: #f0f0f0;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 100px);
+    grid-gap: 3px;
+    display: grid;
+    border: 1px solid #ddd;
+    cursor: pointer;
+}
+.kwadrat {
+    background: #fff; display: flex; justify-content: center; align-items: center;
+    font-size: 2rem; color: black;
+    transition: 1s;
+}
+.kwadrat:hover {
+    background: rgb(33, 221, 58);
+}
+
+
+.kwadrat:active {
+ background-color: #3e8e41;
+    box-shadow: 0 5px #666; 
+    transform: translateY(400px);
+  }

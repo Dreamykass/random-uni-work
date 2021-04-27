@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Page Title</title>
+    <script>
+        function f() {
+            console.log("Enter name or class of tag in the dialog box...");
+            var searched = prompt("Enter name or class of tag", "");
+
+            if (searched == null || searched == "") {
+                console.log("Cancelled the prompt");
+            } else {
+                var items = document.getElementsByTagName("*");
+                for (i of items) {
+                    // console.log(i.tagName);
+                    if (i.tagName === searched || i.classList.contains(searched)) {
+                        console.log("----------------------------------");
+                        console.log("[tag name: " + i.tagName +
+                            ";; classes: " + i.classList + "]");
+                        console.log(i.textContent);
+                        // console.log(i.tagName);
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+
+<body style="background-color:#1a1a1a;">
+
+    <h1>This is a Heading</h1>
+    <p>This is a paragraph.</p>
+    <h1>simea elo</h1>
+    <button>hello</button>
+
+</body>
+
+</html>

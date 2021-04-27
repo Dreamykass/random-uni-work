@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Page Title</title>
+    <script>
+        var words_bank = ["dog", "car", "onomatopoeia", "cat", "new"];
+
+        function foo() {
+            var word = words_bank[Math.floor(Math.random() * words_bank.length)];
+            var unfound_chars = word;
+            var found_chars = "";
+            var points = 0;
+
+            if (confirm("show the randomly selected word?")) {
+                window.alert("word: " + word);
+            }
+
+            while (unfound_chars) {
+                var char = prompt("enter one character", "");
+
+                // window.alert("word: /" + word + "/\n uc: /" + unfound_chars + "/\n fc: /" + found_chars + "/\n char: /" + char + "/\n");
+
+                if (char == null) {
+                    window.alert("cancelled the dialog - game over");
+                    return;
+                } else if (char == "" || char.length != 1) {
+                    window.alert("entered more than one character or none - try again");
+                } else {
+                    if (found_chars.includes(char)) {
+                        window.alert("you already found this char in the word\n"
+                            + "chars that you guessed correctly: " + found_chars + "\n"
+                            + "your points: " + points);
+                    }
+                    else if (unfound_chars.includes(char)) {
+                        found_chars = found_chars + char;
+                        unfound_chars = unfound_chars.replace(char, "");
+                        points += 1;
+
+                        window.alert("you guessed a correct char\n"
+                            + "chars that you guessed correctly: " + found_chars + "\n"
+                            + "your points: " + points);
+                    }
+                    else {
+                        points -= 1;
+
+                        window.alert("you guessed a WRONG char\n"
+                            + "chars that you guessed correctly: " + found_chars + "\n"
+                            + "your points: " + points);
+                    }
+                }
+            }
+
+            window.alert("you finished the game, winning\n"
+                + "the word was: " + word + "\n"
+                + "your points: " + points);
+        }
+    </script>
+</head>
+
+<body style="background-color:#1a1a1a;">
+
+    <h1>This is a Heading</h1>
+    <p>This is a paragraph.</p>
+
+    <button onclick='foo()'>hello</button>
+
+</body>
+
+</html>
