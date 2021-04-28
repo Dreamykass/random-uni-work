@@ -47,13 +47,13 @@ class StudentStuff extends Controller
         DB::table('users')
             ->where('id', '=', $request->get("id"))
             ->update(['group_id' => null]);
-        return redirect("/admin");
+        return redirect("/student_edit?student_id=" . $request->get("id"));
     }
 
     public function add_to_group(Request $request)
     {
         $group = DB::table('groups')
-            ->where('name', '=', $request->get("name"))
+            ->where('name', '=', $request->get("group_name"))
             ->get()
             ->first();
 
@@ -62,6 +62,6 @@ class StudentStuff extends Controller
                 ->where('id', '=', $request->get("id"))
                 ->update(['group_id' => $group->id]);
 
-        return redirect("/admin");
+        return redirect("/student_edit?student_id=" . $request->get("id"));
     }
 }

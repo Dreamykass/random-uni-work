@@ -16,22 +16,22 @@ class Exams extends Migration
         Schema::create('exams', function (Blueprint $table) {
             $table->id();
             $table->string('title');
+            $table->boolean('cancelled')->default(false);
+            $table->boolean('over')->default(false);
         });
-        DB::table('exams')->insert(
-            array(
-                'title' => 'English Test',
-            )
-        );
-        DB::table('exams')->insert(
-            array(
-                'title' => 'Geography Test',
-            )
-        );
 
         Schema::create('questions_in_exams', function (Blueprint $table) {
             $table->id();
             $table->foreignId('question_id')->constrained('questions');
             $table->foreignId('exam_id')->constrained('exams');
+        });
+
+        Schema::create('students_in_exams', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('student_id')->constrained('users');
+            $table->foreignId('exam_id')->constrained('exams');
+            $table->integer('points')->default(0);
+            $table->boolean('done')->default(false);
         });
     }
 

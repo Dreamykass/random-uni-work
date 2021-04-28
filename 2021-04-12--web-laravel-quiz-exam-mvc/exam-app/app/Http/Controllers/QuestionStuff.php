@@ -16,7 +16,7 @@ class QuestionStuff extends Controller
     public function answer_remove(Request $request)
     {
         DB::table('answers')->where('id', '=', $request->get("id"))->delete();
-        return redirect("/admin");
+        return redirect("/question?question_id=" . $request->input("question_id"));
     }
 
     public function answer_toggle(Request $request)
@@ -48,10 +48,10 @@ class QuestionStuff extends Controller
     {
         DB::table('answers')->insert(
             array(
-                'body' => $request->get("body"),
-                'question_id' => $request->get("id"),
+                'body' => $request->input("body"),
+                'question_id' => $request->input("id"),
             )
         );
-        return redirect("/admin");
+        return redirect("/question?question_id=" . $request->input("id"));
     }
 }

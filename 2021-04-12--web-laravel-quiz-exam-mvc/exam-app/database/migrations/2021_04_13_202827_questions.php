@@ -36,7 +36,7 @@ class Questions extends Migration
 
         Schema::create('answers', function (Blueprint $table) {
             $table->id();
-            $table->string('body')->unique();
+            $table->string('body');
             $table->foreignId('question_id')->constrained('questions');
             $table->boolean('correct')->default(false);
         });
