@@ -41,8 +41,11 @@ $students_in_exam = DB::table('students_in_exams')
                         ->get()->first();
                     echo '<li>';
                     echo '' . $student->login . "<br>";
-                    echo ' - Finished: ' . $student_in_exam->done . "<br>";
-                    echo ' - Points: ' . $student_in_exam->points . "<br>";
+                    if ($student_in_exam->done) {
+                        echo 'Finished with this many points: ' . $student_in_exam->points . "<br>";
+                    } else {
+                        echo 'Not yet finished the exam...<br>';
+                    }
                     echo '</li>';
                 }
                 ?>

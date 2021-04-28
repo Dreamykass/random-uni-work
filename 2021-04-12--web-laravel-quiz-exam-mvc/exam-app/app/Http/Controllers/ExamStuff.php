@@ -69,4 +69,45 @@ class ExamStuff extends Controller
 
         return redirect("/admin");
     }
+
+    public function exam_handle_done(Request $request)
+    {
+        $student_in_exam_id = $request->input("student_in_exam_id");
+        $exam_id = $request->input("exam_id");
+
+        $student_in_exam = DB::table('students_in_exams')
+            ->where('student_id', '=', $student_in_exam_id)
+            ->where('exam_id', '=', request('exam_id', '9999'))
+            ->get()
+            ->first();
+
+        $exam = DB::table('exams')
+            ->where('id', '=', $exam_id)
+            ->get()
+            ->first();
+
+        $questions_in_exam = DB::table('questions_in_exams')
+            ->where('exam_id', '=', $exam_id)
+            ->get();
+
+        $points = 0;
+
+        foreach ($questions_in_exam as $question_in_exam) {
+            $point = request($question_in_exam->question_id, '0');
+            $points += $point;
+        }
+
+        DB::table('students_in_exams')
+            ->where('student_id', '=', $student_in_exam_id)
+            ->where('exam_id', '=', $exam_id)
+            ->update(['points' => $points]);
+        DB::table('students_in_exams')
+            ->where('student_id', '=', $student_in_exam_id)
+            ->where('exam_id', '=', $exam_id)
+            ->update(['done' => true]);
+
+//        echo $points;
+
+        return redirect("/student");
+    }
 }

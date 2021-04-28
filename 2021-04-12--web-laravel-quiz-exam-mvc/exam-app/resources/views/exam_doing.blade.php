@@ -33,15 +33,21 @@ $exam = DB::table('exams')
 $questions_in_exam = DB::table('questions_in_exams')
     ->where('exam_id', '=', $exam_id)
     ->get();
-$array = (array)$questions_in_exam;shuffle($array);
+
+$questions_in_exam = $questions_in_exam->shuffle();
 ?>
 
 <section class="section">
     <div class="container content">
         <h1>Exam - {{$exam->title}}</h1>
-        <form method="post" action="">
+        <form method="post" action="/exam_handle_done">
+            <input type="hidden" name="exam_id" value="{{$exam_id}}">
+            <input type="hidden" name="student_in_exam_id" value="{{$student_in_exam_id}}">
+
             <ol>
                 <?php
+                echo csrf_field();
+
                 foreach ($questions_in_exam as $question_in_exam) {
                     $question = DB::table('questions')
                         ->where('id', '=', $question_in_exam->question_id)
@@ -50,16 +56,19 @@ $array = (array)$questions_in_exam;shuffle($array);
                     echo "<li>";
                     echo "" . $question->body;
 
-                    echo "<ol type='a'>";
-                    $answers = DB::table('answers')
-                        ->where('question_id', '=', $question->id)
-                        ->get();
+                    echo "<ul>";
+                    $answers = DB::table('answers')->where('question_id', '=', $question->id)->get();
+                    $answers = $answers->shuffle();
                     foreach ($answers as $answer) {
+//                        echo "<li>";
+//                        echo "" . $answer->body;
+//                        echo "</li>";
                         echo "<li>";
-                        echo "" . $answer->body;
+                        echo '<input type="radio" name="' . $answer->question_id . '" value="' . $answer->correct . '">';
+                        echo "  " . $answer->body;
                         echo "</li>";
                     }
-                    echo "</ol>";
+                    echo "</ul>";
 
                     echo "</li>";
                 }

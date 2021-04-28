@@ -4,12 +4,21 @@
 <head>
     <title>Page Title</title>
     <script>
-        var words_bank = ["dog", "car", "onomatopoeia", "cat", "new"];
+        function alphabet() {
+            var a = [], i = "a".charCodeAt(0), j = "z".charCodeAt(0);
+            for (; i <= j; ++i) {
+                a.push(String.fromCharCode(i));
+            }
+            return a;
+        }
+
+        var words_bank = ["dog", "car", "tak", "cat", "new"];
 
         function foo() {
             var word = words_bank[Math.floor(Math.random() * words_bank.length)];
             var unfound_chars = word;
             var found_chars = "";
+            var word_copy = word;
             var points = 0;
 
             if (confirm("show the randomly selected word?")) {
@@ -30,6 +39,7 @@
                     if (found_chars.includes(char)) {
                         window.alert("you already found this char in the word\n"
                             + "chars that you guessed correctly: " + found_chars + "\n"
+                            + "word with guessed chars: " + word_copy + "\n"
                             + "your points: " + points);
                     }
                     else if (unfound_chars.includes(char)) {
@@ -37,8 +47,18 @@
                         unfound_chars = unfound_chars.replace(char, "");
                         points += 1;
 
+                        word_copy = word_copy.replace(char, char.toUpperCase());
+                        var word_copy_copy = word_copy;
+                        const alphabet = 'abcdefghijklmnopqrstuvwxyz';
+                        for (c in alphabet) {
+                            console.log(c);
+                            console.log(String.fromCharCode(c));
+                            word_copy_copy = word_copy_copy.replace(c.toString(), "*");
+                        }
+
                         window.alert("you guessed a correct char\n"
                             + "chars that you guessed correctly: " + found_chars + "\n"
+                            + "word with guessed chars: " + word_copy_copy + "\n"
                             + "your points: " + points);
                     }
                     else {

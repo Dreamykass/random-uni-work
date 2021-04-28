@@ -20,18 +20,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9e28ae37-08c9-40c4-beb0-c1ee97fa0b2d" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/exam-app.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/exam-app.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ExamStuff.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ExamStuff.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/QuestionStuff.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/QuestionStuff.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/StudentRemove.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/StudentStuff.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/StudentStuff.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2021_04_13_202827_questions.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2021_04_13_202827_questions.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2021_04_13_215930_exams.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2021_04_13_215930_exams.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/exam.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/exam.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/exam_doing.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/exam_doing.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/student.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/student.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/student_edit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/student_edit.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/welcome.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/welcome.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -229,7 +222,7 @@
       <workItem from="1618323522950" duration="17701000" />
       <workItem from="1618391934563" duration="905000" />
       <workItem from="1618501751819" duration="1052000" />
-      <workItem from="1619555989921" duration="14710000" />
+      <workItem from="1619555989921" duration="18423000" />
     </task>
     <servers />
   </component>

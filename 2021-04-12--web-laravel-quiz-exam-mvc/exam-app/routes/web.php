@@ -76,3 +76,4 @@ Route::get('/exam_create', [ExamStuff::class, 'exam_create']);
 Route::post('/exam_doing', function () {
     return view('exam_doing');
 });
+Route::post('/exam_handle_done', [ExamStuff::class, 'exam_handle_done']);
