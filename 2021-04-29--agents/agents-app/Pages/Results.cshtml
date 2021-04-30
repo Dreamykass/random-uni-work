@@ -1,0 +1,36 @@
+﻿@page
+@using agents_app.Code
+@model agents_app.Pages.Results
+
+@{
+  Layout = null;
+  var i = AgentManager.GetFoo();
+  var computers = AgentManager.GetFoundComputers();
+}
+
+<!DOCTYPE html>
+<html lang="">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Hello Bulma!</title>
+    <link rel="stylesheet" href="https://jenil.github.io/bulmaswatch/slate/bulmaswatch.min.css">
+  </head>
+  <body>
+  <section class="section">
+    <div class="container">
+      <h1 class="title">
+        Proposed computers for you: @i
+      </h1>
+      
+      <ol>
+      @foreach (var item in computers)
+      {
+          <li>@item</li>
+      }
+      </ol>
+
+    </div>
+  </section>
+  </body>
+</html>
