@@ -8,14 +8,18 @@
     
     // game, work, movie, net, up, port, know
     
-    int game = int.Parse( Request.Query["game"][0]);
-    int work = int.Parse( Request.Query["work"][0]);
-    int movie = int.Parse( Request.Query["movie"][0]);
-    int net = int.Parse( Request.Query["net"][0]);
-    int up = int.Parse( Request.Query["up"][0]);
-    int port = int.Parse( Request.Query["port"][0]);
-    int know = int.Parse( Request.Query["know"][0]);
+    Parameters parameters = new();
+    
+    parameters.Game = int.Parse( Request.Query["game"][0]);
+    parameters.Work = int.Parse( Request.Query["work"][0]);
+    parameters.Movie = int.Parse( Request.Query["movie"][0]);
+    parameters.Net = int.Parse( Request.Query["net"][0]);
+    parameters.Up = int.Parse( Request.Query["up"][0]);
+    parameters.Port = int.Parse( Request.Query["port"][0]);
+    parameters.Know = int.Parse( Request.Query["know"][0]);
 
+    AgentManager.StartSearching(parameters);
+    
 }
 
 <!DOCTYPE html>
