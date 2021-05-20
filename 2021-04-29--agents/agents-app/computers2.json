@@ -1,0 +1,42 @@
+[
+    {
+        "Name": "undefined",
+        "Cost": -9999,
+        "Parameters": {
+            "Gaming": 1,
+            "GamingPriority": 1,
+            "Know": 1,
+            "KnowPriority": 1,
+            "Movies": 1,
+            "MoviesPriority": 1,
+            "Browsing": 1,
+            "BrowsingPriority": 1,
+            "Portability": 1,
+            "PortabilityPriority": 1,
+            "Upgrading": 1,
+            "UpgradingPriority": 1,
+            "Working": 1,
+            "WorkingPriority": 1
+        }
+    },
+    {
+        "Name": "undefined",
+        "Cost": -9999,
+        "Parameters": {
+            "Gaming": 1,
+            "GamingPriority": 1,
+            "Know": 1,
+            "KnowPriority": 1,
+            "Movies": 1,
+            "MoviesPriority": 1,
+            "Browsing": 1,
+            "BrowsingPriority": 1,
+            "Portability": 1,
+            "PortabilityPriority": 1,
+            "Upgrading": 1,
+            "UpgradingPriority": 1,
+            "Working": 1,
+            "WorkingPriority": 1
+        }
+    }
+]

@@ -2,10 +2,11 @@
 
 namespace agents_app.Pages
 {
-    public class Chosen : PageModel
+    public class Sellers : PageModel
     {
         public void OnGet()
         {
+            
         }
     }
 }

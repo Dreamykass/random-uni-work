@@ -7,6 +7,14 @@ namespace agents_app
     {
         public static void Main(string[] args)
         {
+            // var c = new Computer();
+            // c.Parameters = new Parameters();
+            // var l = new List<Computer>();
+            // l.Add(c);
+            // l.Add(c);
+            // var jsonString = JsonSerializer.Serialize(l);
+            // File.WriteAllText("computers2.json", jsonString);
+
             CreateHostBuilder(args).Build().Run();
         }
 

@@ -1,0 +1,296 @@
+[
+    {
+        "Name": "All in One HP 06GB",
+        "Link": "https://www.x-kom.pl/p/607416-all-in-one-hp-24-aio-i3-10100t-8gb-256-win10-white.html",
+        "Parameters": {
+            "Cost": 2000,
+            "Gaming": 0,
+            "Working": 4,
+            "Movies": 3,
+            "Browsing": 9,
+            "Upgrading": 5,
+            "Portability": 6,
+            "Knowledge": 5,
+            "UpgradingPriority": 0,
+            "PortabilityPriority": 0,
+            "MoviesPriority": 0,
+            "BrowsingPriority": 0,
+            "KnowledgePriority": 0,
+            "GamingPriority": 0,
+            "WorkingPriority": 0
+        }
+    },
+    {
+        "Name": "ASUS VivoStick",
+        "Link": "google.com",
+        "Parameters": {
+            "Cost": 2000,
+            "Gaming": 0,
+            "Working": 3,
+            "Movies": 3,
+            "Browsing": 7,
+            "Upgrading": 6,
+            "Portability": 10,
+            "Knowledge": 3,
+            "UpgradingPriority": 0,
+            "PortabilityPriority": 0,
+            "MoviesPriority": 0,
+            "BrowsingPriority": 0,
+            "KnowledgePriority": 0,
+            "GamingPriority": 0,
+            "WorkingPriority": 0
+        }
+    },
+    {
+        "Name": "Apple Mac Mini",
+        "Link": "google.com",
+        "Parameters": {
+            "Cost": 2000,
+            "Gaming": 0,
+            "Working": 1,
+            "Movies": 4,
+            "Browsing": 8,
+            "Upgrading": 1,
+            "Portability": 4,
+            "Knowledge": 1,
+            "UpgradingPriority": 0,
+            "PortabilityPriority": 0,
+            "MoviesPriority": 0,
+            "BrowsingPriority": 0,
+            "KnowledgePriority": 0,
+            "GamingPriority": 0,
+            "WorkingPriority": 0
+        }
+    },
+    {
+        "Name": "Dell Vostro",
+        "Link": "google.com",
+        "Parameters": {
+            "Cost": 2000,
+            "Gaming": 4,
+            "Working": 8,
+            "Movies": 4,
+            "Browsing": 5,
+            "Upgrading": 7,
+            "Portability": 2,
+            "Knowledge": 6,
+            "UpgradingPriority": 0,
+            "PortabilityPriority": 0,
+            "MoviesPriority": 0,
+            "BrowsingPriority": 0,
+            "KnowledgePriority": 0,
+            "GamingPriority": 0,
+            "WorkingPriority": 0
+        }
+    },
+    {
+        "Name": "Shiru 7200",
+        "Link": "google.com",
+        "Parameters": {
+            "Cost": 2000,
+            "Gaming": 9,
+            "Working": 4,
+            "Movies": 5,
+            "Browsing": 6,
+            "Upgrading": 6,
+            "Portability": 0,
+            "Knowledge": 8,
+            "UpgradingPriority": 0,
+            "PortabilityPriority": 0,
+            "MoviesPriority": 0,
+            "BrowsingPriority": 0,
+            "KnowledgePriority": 0,
+            "GamingPriority": 0,
+            "WorkingPriority": 0
+        }
+    },
+    {
+        "Name": "undefined",
+        "Link": "google.com",
+        "Parameters": {
+            "Cost": 2000,
+            "Gaming": 0,
+            "Working": 0,
+            "Movies": 0,
+            "Browsing": 0,
+            "Upgrading": 0,
+            "Portability": 0,
+            "Knowledge": 0,
+            "UpgradingPriority": 0,
+            "PortabilityPriority": 0,
+            "MoviesPriority": 0,
+            "BrowsingPriority": 0,
+            "KnowledgePriority": 0,
+            "GamingPriority": 0,
+            "WorkingPriority": 0
+        }
+    },
+    {
+        "Name": "undefined",
+        "Link": "google.com",
+        "Parameters": {
+            "Cost": 2000,
+            "Gaming": 0,
+            "Working": 0,
+            "Movies": 0,
+            "Browsing": 0,
+            "Upgrading": 0,
+            "Portability": 0,
+            "Knowledge": 0,
+            "UpgradingPriority": 0,
+            "PortabilityPriority": 0,
+            "MoviesPriority": 0,
+            "BrowsingPriority": 0,
+            "KnowledgePriority": 0,
+            "GamingPriority": 0,
+            "WorkingPriority": 0
+        }
+    },
+    {
+        "Name": "undefined",
+        "Link": "google.com",
+        "Parameters": {
+            "Cost": 2000,
+            "Gaming": 0,
+            "Working": 0,
+            "Movies": 0,
+            "Browsing": 0,
+            "Upgrading": 0,
+            "Portability": 0,
+            "Knowledge": 0,
+            "UpgradingPriority": 0,
+            "PortabilityPriority": 0,
+            "MoviesPriority": 0,
+            "BrowsingPriority": 0,
+            "KnowledgePriority": 0,
+            "GamingPriority": 0,
+            "WorkingPriority": 0
+        }
+    },
+    {
+        "Name": "undefined",
+        "Link": "google.com",
+        "Parameters": {
+            "Cost": 2000,
+            "Gaming": 0,
+            "Working": 0,
+            "Movies": 0,
+            "Browsing": 0,
+            "Upgrading": 0,
+            "Portability": 0,
+            "Knowledge": 0,
+            "UpgradingPriority": 0,
+            "PortabilityPriority": 0,
+            "MoviesPriority": 0,
+            "BrowsingPriority": 0,
+            "KnowledgePriority": 0,
+            "GamingPriority": 0,
+            "WorkingPriority": 0
+        }
+    },
+    {
+        "Name": "undefined",
+        "Link": "google.com",
+        "Parameters": {
+            "Cost": 2000,
+            "Gaming": 0,
+            "Working": 0,
+            "Movies": 0,
+            "Browsing": 0,
+            "Upgrading": 0,
+            "Portability": 0,
+            "Knowledge": 0,
+            "UpgradingPriority": 0,
+            "PortabilityPriority": 0,
+            "MoviesPriority": 0,
+            "BrowsingPriority": 0,
+            "KnowledgePriority": 0,
+            "GamingPriority": 0,
+            "WorkingPriority": 0
+        }
+    },
+    {
+        "Name": "undefined",
+        "Link": "google.com",
+        "Parameters": {
+            "Cost": 2000,
+            "Gaming": 0,
+            "Working": 0,
+            "Movies": 0,
+            "Browsing": 0,
+            "Upgrading": 0,
+            "Portability": 0,
+            "Knowledge": 0,
+            "UpgradingPriority": 0,
+            "PortabilityPriority": 0,
+            "MoviesPriority": 0,
+            "BrowsingPriority": 0,
+            "KnowledgePriority": 0,
+            "GamingPriority": 0,
+            "WorkingPriority": 0
+        }
+    },
+    {
+        "Name": "undefined",
+        "Link": "google.com",
+        "Parameters": {
+            "Cost": 2000,
+            "Gaming": 0,
+            "Working": 0,
+            "Movies": 0,
+            "Browsing": 0,
+            "Upgrading": 0,
+            "Portability": 0,
+            "Knowledge": 0,
+            "UpgradingPriority": 0,
+            "PortabilityPriority": 0,
+            "MoviesPriority": 0,
+            "BrowsingPriority": 0,
+            "KnowledgePriority": 0,
+            "GamingPriority": 0,
+            "WorkingPriority": 0
+        }
+    },
+    {
+        "Name": "undefined",
+        "Link": "google.com",
+        "Parameters": {
+            "Cost": 2000,
+            "Gaming": 0,
+            "Working": 0,
+            "Movies": 0,
+            "Browsing": 0,
+            "Upgrading": 0,
+            "Portability": 0,
+            "Knowledge": 0,
+            "UpgradingPriority": 0,
+            "PortabilityPriority": 0,
+            "MoviesPriority": 0,
+            "BrowsingPriority": 0,
+            "KnowledgePriority": 0,
+            "GamingPriority": 0,
+            "WorkingPriority": 0
+        }
+    },
+    {
+        "Name": "undefined",
+        "Link": "google.com",
+        "Parameters": {
+            "Cost": 2000,
+            "Gaming": 0,
+            "Working": 0,
+            "Movies": 0,
+            "Browsing": 0,
+            "Upgrading": 0,
+            "Portability": 0,
+            "Knowledge": 0,
+            "UpgradingPriority": 0,
+            "PortabilityPriority": 0,
+            "MoviesPriority": 0,
+            "BrowsingPriority": 0,
+            "KnowledgePriority": 0,
+            "GamingPriority": 0,
+            "WorkingPriority": 0
+        }
+    }
+]

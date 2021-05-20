@@ -4,25 +4,25 @@
 
 @{
     Layout = "_Layout";
-    
+
     Parameters parameters = new();
 
-    parameters.Game = int.Parse(Request.Query["game"][0]);
-    parameters.GamePriority = int.Parse(Request.Query["game"][0]);
-    parameters.Work = int.Parse(Request.Query["work"][0]);
-    parameters.WorkPriority = int.Parse(Request.Query["work"][0]);
-    parameters.Movie = int.Parse(Request.Query["movie"][0]);
-    parameters.MoviePriority = int.Parse(Request.Query["movie"][0]);
-    parameters.Net = int.Parse(Request.Query["net"][0]);
-    parameters.NetPriority = int.Parse(Request.Query["net"][0]);
-    parameters.Up = int.Parse(Request.Query["up"][0]);
-    parameters.UpPriority = int.Parse(Request.Query["up"][0]);
-    parameters.Port = int.Parse(Request.Query["port"][0]);
-    parameters.PortPriority = int.Parse(Request.Query["port"][0]);
-    parameters.Know = int.Parse(Request.Query["know"][0]);
-    parameters.KnowPriority = int.Parse(Request.Query["know"][0]);
+    parameters.Gaming = int.Parse(Request.Query["game"][0]);
+    parameters.GamingPriority = int.Parse(Request.Query["game"][0]);
+    parameters.Working = int.Parse(Request.Query["work"][0]);
+    parameters.WorkingPriority = int.Parse(Request.Query["work"][0]);
+    parameters.Movies = int.Parse(Request.Query["movie"][0]);
+    parameters.MoviesPriority = int.Parse(Request.Query["movie"][0]);
+    parameters.Browsing = int.Parse(Request.Query["net"][0]);
+    parameters.BrowsingPriority = int.Parse(Request.Query["net"][0]);
+    parameters.Upgrading = int.Parse(Request.Query["up"][0]);
+    parameters.UpgradingPriority = int.Parse(Request.Query["up"][0]);
+    parameters.Portability = int.Parse(Request.Query["port"][0]);
+    parameters.PortabilityPriority = int.Parse(Request.Query["port"][0]);
+    parameters.Knowledge = int.Parse(Request.Query["know"][0]);
+    parameters.KnowledgePriority = int.Parse(Request.Query["know"][0]);
 
-    AgentManager.SetParameters(parameters);
+    World.SetParameters(parameters);
 
 }
 

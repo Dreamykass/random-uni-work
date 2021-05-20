@@ -4,14 +4,15 @@
 
 @{
     Layout = "_Layout";
-    var computers = AgentManager.GetFoundComputers();
+    var computers = World.GetFoundComputers();
 }
 
 <h1 class="title">
     Proposed computers for you - please select one:
 </h1>
 
-<form action="Chosen"><ol>
+<form action="Chosen">
+    <ol>
         @{
             var i = 0;
             foreach (var computer in computers)

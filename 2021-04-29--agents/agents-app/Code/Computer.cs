@@ -1,28 +1,31 @@
-﻿
+﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
+using System.Text.Json;
 
 namespace agents_app.Code
 {
     public class Computer
     {
-        public string Name;
-        public int Cost;
+        public string Name { get; set; } = "undefined";
+        public string Link { get; set; } = "google.com";
+        public Parameters Parameters { get; set; } = null;
 
-        public Computer(string name, int cost)
+        private static List<Computer> AllComputers { get; }
+
+        static Computer()
         {
-            Name = name;
-            Cost = cost;
+            var json = File.ReadAllText("computers.json");
+            var list = JsonSerializer.Deserialize<List<Computer>>(json);
+            Trace.Assert(list != null);
+            list.RemoveAll(c => c.Name.Contains("undefined"));
+            AllComputers = list;
         }
 
         public static List<Computer> GetAllComputers()
         {
-            var list = new List<Computer>();
-            list.Add(new Computer("All in one HP 16GB", 7000));
-            list.Add(new Computer("ASUS VivoStick", 8000));
-            list.Add(new Computer("Apple Mac Mini", 99999));
-            list.Add(new Computer("Dell Vostro", 82000));
-            list.Add(new Computer("Shiru 7200", 12000));
-            return list;
+            return AllComputers;
         }
     }
 }

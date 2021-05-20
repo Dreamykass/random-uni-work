@@ -1,0 +1,38 @@
+﻿@page
+@using agents_app.Code
+@model agents_app.Pages.Sellers
+
+@{
+    Layout = "_Layout";
+}
+
+<h1 class="title">Sellers:</h1>
+
+<div class="columns is-multiline">
+    @* <ol class="content"> *@
+    @{
+        foreach (var (seller, i) in World.Sellers.Select(((s, i) => (s, i))))
+        {
+            @:
+            <div class="column is-one-quarter">
+                <div class="box">
+                    @* <li> *@
+                    <h1> seller #@i </h1>
+                    <ol>
+                        @{
+                            foreach (var computer in seller.ComputersInStock)
+                            {
+                                @:
+                                <li>
+                                    @computer.Name - @computer.Parameters.Cost
+                                </li>
+                            }
+                        }
+                    </ol>
+                </div>
+            </div>
+            // </li>
+        }
+    }
+    @* </ol> *@
+</div>
