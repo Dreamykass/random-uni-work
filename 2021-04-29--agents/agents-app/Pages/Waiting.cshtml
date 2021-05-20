@@ -7,20 +7,20 @@
 
     Parameters parameters = new();
 
-    parameters.Gaming = int.Parse(Request.Query["game"][0]);
-    parameters.GamingPriority = int.Parse(Request.Query["game"][0]);
-    parameters.Working = int.Parse(Request.Query["work"][0]);
-    parameters.WorkingPriority = int.Parse(Request.Query["work"][0]);
-    parameters.Movies = int.Parse(Request.Query["movie"][0]);
-    parameters.MoviesPriority = int.Parse(Request.Query["movie"][0]);
-    parameters.Browsing = int.Parse(Request.Query["net"][0]);
-    parameters.BrowsingPriority = int.Parse(Request.Query["net"][0]);
-    parameters.Upgrading = int.Parse(Request.Query["up"][0]);
-    parameters.UpgradingPriority = int.Parse(Request.Query["up"][0]);
-    parameters.Portability = int.Parse(Request.Query["port"][0]);
-    parameters.PortabilityPriority = int.Parse(Request.Query["port"][0]);
-    parameters.Knowledge = int.Parse(Request.Query["know"][0]);
-    parameters.KnowledgePriority = int.Parse(Request.Query["know"][0]);
+    parameters.Gaming = float.Parse(Request.Query["game"][0]);
+    parameters.GamingPriority = float.Parse(Request.Query["game_priority"][0]);
+    parameters.Working = float.Parse(Request.Query["work"][0]);
+    parameters.WorkingPriority = float.Parse(Request.Query["work_priority"][0]);
+    parameters.Movies = float.Parse(Request.Query["movie"][0]);
+    parameters.MoviesPriority = float.Parse(Request.Query["movie_priority"][0]);
+    parameters.Browsing = float.Parse(Request.Query["net"][0]);
+    parameters.BrowsingPriority = float.Parse(Request.Query["net_priority"][0]);
+    parameters.Upgrading = float.Parse(Request.Query["up"][0]);
+    parameters.UpgradingPriority = float.Parse(Request.Query["up_priority"][0]);
+    parameters.Portability = float.Parse(Request.Query["port"][0]);
+    parameters.PortabilityPriority = float.Parse(Request.Query["port_priority"][0]);
+    parameters.Knowledge = float.Parse(Request.Query["know"][0]);
+    parameters.KnowledgePriority = float.Parse(Request.Query["know_priority"][0]);
 
     World.SetParameters(parameters);
 

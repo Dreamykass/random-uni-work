@@ -25,7 +25,8 @@ namespace agents_app.Code
                 ComputersInStock.Add(computer);
             }
 
-            ComputersInStock.Sort(((c1, c2) => c1.Parameters.Cost.CompareTo(c2.Parameters.Cost)));
+            // ComputersInStock.Sort((c1, c2) => c1.Parameters.Cost.CompareTo(c2.Parameters.Cost));
+            ComputersInStock.Sort((c1, c2) => string.Compare(c1.Name, c2.Name, StringComparison.Ordinal));
         }
 
         public List<Computer> SuggestComputersForParameters(Parameters parameters)

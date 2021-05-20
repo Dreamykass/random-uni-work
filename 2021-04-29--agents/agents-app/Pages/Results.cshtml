@@ -4,7 +4,8 @@
 
 @{
     Layout = "_Layout";
-    var computers = World.GetFoundComputers();
+    var computers = World.GetFoundComputers().ToList();
+    computers.Sort((c1, c2) => c1.Parameters.Cost.CompareTo(c2.Parameters.Cost));
 }
 
 <h1 class="title">
@@ -17,10 +18,12 @@
             var i = 0;
             foreach (var computer in computers)
             {
-                <li>
+                <li class="box">
                     <input type="radio" id="input_@i" name="computer" value="@computer.Name" checked>
-                    <label for="input_@i">@computer.Name</label>
-                    <br>
+                    <label for="input_@i" class="title is-5">@computer.Name</label><br>
+                    Cost: <strong>@computer.Parameters.Cost</strong> <br>
+                    Divergence: <strong>@computer.Parameters.DivergenceFromUserInputParameters(World.UserInputParameters)</strong> <br>
+                    <a href="@computer.Link">@computer.Link</a> <br>
                 </li>
                 i++;
             }

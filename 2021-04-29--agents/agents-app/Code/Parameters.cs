@@ -82,14 +82,19 @@ namespace agents_app.Code
 
             foreach (var dictionaryKey in dictionaryKeys)
             {
+                Console.WriteLine(dictionaryKey + ": " + userPriorities[dictionaryKey]);
+            }
+
+            foreach (var dictionaryKey in dictionaryKeys)
+            {
                 var computerParameter = computerParameters[dictionaryKey];
                 var userParameter = userParameters[dictionaryKey];
                 var userPriority = userPriorities[dictionaryKey];
                 
                 // asserts:
-                Trace.Assert(computerParameter >= 0.0 && computerParameter <= 10.0);
-                Trace.Assert(userParameter >= 0.0 && userParameter <= 10.0);
-                Trace.Assert(userPriority >= 0.0 && userPriority <= 1.0);
+                Trace.Assert(computerParameter >= -0.1 && computerParameter <= 10.1);
+                Trace.Assert(userParameter >= -0.1 && userParameter <= 10.1);
+                Trace.Assert(userPriority >= -0.1 && userPriority <= 1.1);
                 
                 likeness += Math.Abs(computerParameter - userParameter) * userPriority;
             }
