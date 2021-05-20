@@ -3,33 +3,28 @@
 @model agents_app.Pages.Results
 
 @{
-  Layout = null;
-  var computers = AgentManager.GetFoundComputers();
+    Layout = "_Layout";
+    var computers = AgentManager.GetFoundComputers();
 }
 
-<!DOCTYPE html>
-<html lang="">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Hello Bulma!</title>
-    <link rel="stylesheet" href="https://jenil.github.io/bulmaswatch/slate/bulmaswatch.min.css">
-  </head>
-  <body>
-  <section class="section">
-    <div class="container">
-      <h1 class="title">
-        Proposed computers for you:
-      </h1>
-      
-      <ol>
-      @foreach (var item in computers)
-      {
-          <li>@item</li>
-      }
-      </ol>
+<h1 class="title">
+    Proposed computers for you - please select one:
+</h1>
 
-    </div>
-  </section>
-  </body>
-</html>
+<form action="Chosen"><ol>
+        @{
+            var i = 0;
+            foreach (var computer in computers)
+            {
+                <li>
+                    <input type="radio" id="input_@i" name="computer" value="@computer.Name" checked>
+                    <label for="input_@i">@computer.Name</label>
+                    <br>
+                </li>
+                i++;
+            }
+        }
+        <br>
+        <input type="submit" class="input" value="Submit!">
+    </ol>
+</form>

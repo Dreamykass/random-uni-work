@@ -1,25 +1,29 @@
 ﻿@page
 @using agents_app.Code
-@using Microsoft.AspNetCore.Http
 @model agents_app.Pages.Waiting
 
 @{
-    Layout = null;
-    
-    // game, work, movie, net, up, port, know
+    Layout = "_Layout";
     
     Parameters parameters = new();
-    
-    parameters.Game = int.Parse( Request.Query["game"][0]);
-    parameters.Work = int.Parse( Request.Query["work"][0]);
-    parameters.Movie = int.Parse( Request.Query["movie"][0]);
-    parameters.Net = int.Parse( Request.Query["net"][0]);
-    parameters.Up = int.Parse( Request.Query["up"][0]);
-    parameters.Port = int.Parse( Request.Query["port"][0]);
-    parameters.Know = int.Parse( Request.Query["know"][0]);
 
-    AgentManager.StartSearching(parameters);
-    
+    parameters.Game = int.Parse(Request.Query["game"][0]);
+    parameters.GamePriority = int.Parse(Request.Query["game"][0]);
+    parameters.Work = int.Parse(Request.Query["work"][0]);
+    parameters.WorkPriority = int.Parse(Request.Query["work"][0]);
+    parameters.Movie = int.Parse(Request.Query["movie"][0]);
+    parameters.MoviePriority = int.Parse(Request.Query["movie"][0]);
+    parameters.Net = int.Parse(Request.Query["net"][0]);
+    parameters.NetPriority = int.Parse(Request.Query["net"][0]);
+    parameters.Up = int.Parse(Request.Query["up"][0]);
+    parameters.UpPriority = int.Parse(Request.Query["up"][0]);
+    parameters.Port = int.Parse(Request.Query["port"][0]);
+    parameters.PortPriority = int.Parse(Request.Query["port"][0]);
+    parameters.Know = int.Parse(Request.Query["know"][0]);
+    parameters.KnowPriority = int.Parse(Request.Query["know"][0]);
+
+    AgentManager.SetParameters(parameters);
+
 }
 
 <!DOCTYPE html>
@@ -27,6 +31,7 @@
 <head>
     <title></title>
     <script>
+        // go to results page
         window.location.replace("Results");
     </script>
 </head>

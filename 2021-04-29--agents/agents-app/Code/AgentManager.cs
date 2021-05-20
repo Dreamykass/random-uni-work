@@ -1,28 +1,33 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 
 namespace agents_app.Code
 {
     public static class AgentManager
     {
-        public static int foo = 5;
-        public static List<Agent> agents = new();
+        public static List<Agent> Agents = new();
+        public static Parameters Parameters;
 
         static AgentManager()
         {
-            // agents.Add();
+            Agents.Add(new Agent());
+            Agents.Add(new Agent());
+            Agents.Add(new Agent());
         }
 
-        public static void StartSearching(Parameters parameters)
+        public static void SetParameters(Parameters parameters)
+        {
+            Parameters = parameters;
+        }
+
+        public static IEnumerable<Computer> GetFoundComputers()
+        {
+            return Agents.Select(agent => agent.GetComputer(Parameters)).ToList();
+        }
+
+        public static void GiveFeedback(Computer chosenComputer)
         {
             
         }
-
-        public static List<String> GetFoundComputers()
-        {
-            string[] computers = {"All in one HP 16GB", "ASUS VivoStick", "Apple Mac Mini", "Dell Vostro", "Shiru 7200"}; 
-            return computers.Shuffle().Take(4).ToList();
-        } 
     }
 }

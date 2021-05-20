@@ -6,7 +6,6 @@ namespace agents_app.Pages
     {
         public void OnGet()
         {
-            
         }
     }
 }
