@@ -34,7 +34,8 @@ namespace agents_app.Code
             var list = new List<Computer>();
             foreach (var computer in ComputersInStock)
             {
-                list.Add(computer);
+                if (computer.Parameters.Cost <= World.UserInputParameters.Cost)
+                    list.Add(computer);
             }
 
             list.Shuffle();

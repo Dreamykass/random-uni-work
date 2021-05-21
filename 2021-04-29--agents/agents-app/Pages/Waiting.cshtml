@@ -22,6 +22,8 @@
     parameters.Knowledge = float.Parse(Request.Query["know"][0]);
     parameters.KnowledgePriority = float.Parse(Request.Query["know_priority"][0]);
 
+    parameters.Cost = int.Parse(Request.Query["cost"][0]);
+
     World.SetParameters(parameters);
 
 }
