@@ -31,6 +31,17 @@ angular.module("App", []).controller("Controller", function ($scope) {
       $scope.input = "0";
     }
 
+    // ⌫
+    if (action === "⌫") {
+      $scope.input = $scope.input.slice(0, -1);
+      if ($scope.input === "") $scope.input = "0";
+    }
+
+    // π
+    if (action === "π") {
+      $scope.input = 'π'
+    }
+
     // + - * /
     ["+", "-", "*", "/"].forEach((op) => {
       if (action === op) {
@@ -48,8 +59,14 @@ angular.module("App", []).controller("Controller", function ($scope) {
     // =
     if (action === "=") {
       log("evaluating...");
-      $scope.input = math.evaluate($scope.calculation + $scope.input) + '';
-      $scope.calculation = "";
+      log("input: " + $scope.input);
+      log("calculation: " + $scope.calculation);
+
+      $scope.calculation = $scope.calculation.replace('π', '3.14159')
+      $scope.input = $scope.input.replace('π', '3.14159')
+
+      $scope.input = math.evaluate($scope.calculation + $scope.input) + "";
+      // $scope.calculation = "";
     }
   };
 });
