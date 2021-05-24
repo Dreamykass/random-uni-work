@@ -48,7 +48,7 @@ angular.module("App", []).controller("Controller", function ($scope) {
     // =
     if (action === "=") {
       log("evaluating...");
-      $scope.input = math.evaluate($scope.calculation + $scope.input);
+      $scope.input = math.evaluate($scope.calculation + $scope.input) + '';
       $scope.calculation = "";
     }
   };
