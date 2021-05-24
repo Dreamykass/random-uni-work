@@ -9,12 +9,9 @@
       href="https://jenil.github.io/bulmaswatch/nuclear/bulmaswatch.min.css"
     />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.2/angular.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/9.3.2/math.js"></script>
     <script src="controller.js"></script>
-    <style>
-      .justify-content-start {
-        justify-content: flex-start;
-      }
-    </style>
+    <style></style>
   </head>
 
   <body>
@@ -25,8 +22,12 @@
       </div>
     </section>
     <div class="columns is-centered">
-      <div class="column is-narrow content box">
-        <!-- ---------------------------------------------- calculator --------------------- -->
+      <!-- ---------------------------------------------- calculator --------------------- -->
+      <div
+        class="column is-narrow content box"
+        ng-app="App"
+        ng-controller="Controller"
+      >
         <div class="columns is-vcentered">
           <div
             class="column is-two-thirds button is-light has-text-left is-small"
@@ -44,73 +45,113 @@
           <div class="column button is-white is-medium">⟲</div>
         </div>
         <div class="columns is-vcentered">
-          <div class="column button is-white has-text-right is-size-1">0</div>
+          <div class="column button is-white has-text-right">
+            {{calculation}}
+          </div>
         </div>
         <div class="columns is-vcentered">
-          <div class="column is-one-fifth button is-white is-small">GRAD</div>
-          <div class="column is-one-fifth button is-white is-small">HYP</div>
-          <div class="column is-one-fifth button is-white is-small">F-E</div>
+          <div class="column button is-white has-text-right is-size-4">
+            {{input}}
+          </div>
+        </div>
+        <div class="columns is-vcentered">
+          <div
+            class="column is-one-fifth button is-white is-small"
+            ng-click="HandleInput('GRAD')"
+          >
+            GRAD
+          </div>
+          <div
+            class="column is-one-fifth button is-white is-small"
+            ng-click="HandleInput('HYP')"
+          >
+            HYP
+          </div>
+          <div
+            class="column is-one-fifth button is-white is-small"
+            ng-click="HandleInput('F-E')"
+          >
+            F-E
+          </div>
           <div class="column button is-white is-small"></div>
         </div>
         <div class="columns is-vcentered">
-          <div class="column is-one-sixth button is-light is-small">MC</div>
-          <div class="column is-one-sixth button is-light is-small">MR</div>
-          <div class="column is-one-sixth button is-light is-small">M+</div>
-          <div class="column is-one-sixth button is-light is-small">M-</div>
-          <div class="column is-one-sixth button is-light is-small">MS</div>
-          <div class="column is-one-sixth button is-light is-small">M</div>
+          <script>
+            ["MC", "MR", "M+", "M-", "MS", "M"].forEach((e) => {
+              document.write(
+                `<div class="column is-one-sixth button is-light is-small" ng-click="HandleInput('${e}')" >${e} </div>`
+              );
+            });
+          </script>
         </div>
         <div class="columns is-vcentered">
-          <div class="column is-one-fifth button is-light">x^2</div>
-          <div class="column is-one-fifth button is-light">x^y</div>
-          <div class="column is-one-fifth button is-light">sinh</div>
-          <div class="column is-one-fifth button is-light">cosh</div>
-          <div class="column is-one-fifth button is-light">tanh</div>
+          <script>
+            ["x^2", "x^y", "sinh", "cosh", "tanh"].forEach((e) => {
+              document.write(
+                `<div class="column is-one-fifth button is-light" ng-click="HandleInput('${e}')" >${e} </div>`
+              );
+            });
+          </script>
         </div>
         <div class="columns is-vcentered">
-          <div class="column is-one-fifth button is-light">√</div>
-          <div class="column is-one-fifth button is-light">10^x</div>
-          <div class="column is-one-fifth button is-light">log</div>
-          <div class="column is-one-fifth button is-light">Exp</div>
-          <div class="column is-one-fifth button is-light">Mod</div>
+          <script>
+            ["√", "10^x", "log", "Exp", "Mod"].forEach((e) => {
+              document.write(
+                `<div class="column is-one-fifth button is-light" ng-click="HandleInput('${e}')" >${e} </div>`
+              );
+            });
+          </script>
         </div>
         <div class="columns is-vcentered">
-          <div class="column is-one-fifth button is-white">↑</div>
-          <div class="column is-one-fifth button is-white">CE</div>
-          <div class="column is-one-fifth button is-white">C</div>
-          <div class="column is-one-fifth button is-white">⌫</div>
-          <div class="column is-one-fifth button is-white">/</div>
+          <script>
+            ["↑", "CE", "C", "⌫", "/"].forEach((e) => {
+              document.write(
+                `<div class="column is-one-fifth button is-white is-large" ng-click="HandleInput('${e}')" >${e} </div>`
+              );
+            });
+          </script>
         </div>
         <div class="columns is-vcentered">
-          <div class="column is-one-fifth button is-white is-large">π</div>
-          <div class="column is-one-fifth button is-white is-large">7</div>
-          <div class="column is-one-fifth button is-white is-large">8</div>
-          <div class="column is-one-fifth button is-white is-large">9</div>
-          <div class="column is-one-fifth button is-white is-large">*</div>
+          <script>
+            ["π", "7", "8", "9", "*"].forEach((e) => {
+              document.write(
+                `<div class="column is-one-fifth button is-white is-large" ng-click="HandleInput('${e}')" >${e} </div>`
+              );
+            });
+          </script>
         </div>
         <div class="columns is-vcentered">
-          <div class="column is-one-fifth button is-white is-large">n!</div>
-          <div class="column is-one-fifth button is-white is-large">4</div>
-          <div class="column is-one-fifth button is-white is-large">5</div>
-          <div class="column is-one-fifth button is-white is-large">6</div>
-          <div class="column is-one-fifth button is-white is-large">-</div>
+          <script>
+            ["n!", "4", "5", "6", "-"].forEach((e) => {
+              document.write(
+                `<div class="column is-one-fifth button is-white is-large" ng-click="HandleInput('${e}')" >${e} </div>`
+              );
+            });
+          </script>
         </div>
         <div class="columns is-vcentered">
-          <div class="column is-one-fifth button is-white is-large">±</div>
-          <div class="column is-one-fifth button is-white is-large">1</div>
-          <div class="column is-one-fifth button is-white is-large">2</div>
-          <div class="column is-one-fifth button is-white is-large">3</div>
-          <div class="column is-one-fifth button is-white is-large">+</div>
+          <script>
+            ["±", "1", "2", "3", "+"].forEach((e) => {
+              document.write(
+                `<div class="column is-one-fifth button is-white is-large" ng-click="HandleInput('${e}')" >${e} </div>`
+              );
+            });
+          </script>
         </div>
         <div class="columns is-vcentered">
-          <div class="column is-one-fifth button is-white is-large">(</div>
-          <div class="column is-one-fifth button is-white is-large">)</div>
-          <div class="column is-one-fifth button is-white is-large">0</div>
-          <div class="column is-one-fifth button is-white is-large">,</div>
-          <div class="column is-one-fifth button is-white is-large">=</div>
+          <script>
+            ["(", ")", "0", ".", "="].forEach((e) => {
+              document.write(
+                `<div class="column is-one-fifth button is-white is-large" ng-click="HandleInput('${e}')" >${e} </div>`
+              );
+            });
+          </script>
         </div>
-        <!-- ---------------------------------------------- calculator --------------------- -->
       </div>
+      <!-- ---------------------------------------------- calculator --------------------- -->
+      <!-- ---------------------------------------------- history --------------------- -->
+      <div class="column is-narrow content box ">history?</div>
+      <!-- ---------------------------------------------- history --------------------- -->
     </div>
   </body>
 </html>
