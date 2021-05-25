@@ -40,16 +40,30 @@
         </div>
         <div class="columns is-vcentered">
           <div class="column is-narrow button is-white is-medium">≡</div>
-          <div class="column button is-white is-medium">Scientific</div>
+          <div class="column button is-white is-medium">
+            Scientific
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          </div>
           <div class="column button is-white is-medium"></div>
           <div class="column button is-white is-medium">⟲</div>
         </div>
         <div class="columns is-vcentered">
+          <div class="column button is-narrow is-small is-white has-text-grey">
+            M
+          </div>
+          <div class="column button is-white has-text-right is-small">
+            {{MemoryDisplay()}}
+          </div>
+        </div>
+        <div class="columns is-vcentered">
+          <div class="column button is-narrow is-white has-text-grey">C</div>
           <div class="column button is-white has-text-right">
             {{calculation}}
           </div>
         </div>
         <div class="columns is-vcentered">
+          <div class="column button is-narrow is-white has-text-grey">E</div>
           <div class="column button is-white has-text-right is-size-2 is-large">
             {{input}}
           </div>
@@ -86,7 +100,7 @@
         </div>
         <div class="columns is-vcentered">
           <script>
-            ["x^2", "x^y", "sinh", "cosh", "tanh"].forEach((e) => {
+            ["x²", "xʸ", "sinh", "cosh", "tanh"].forEach((e) => {
               document.write(
                 `<div class="column is-one-fifth button is-light" ng-click="HandleInput('${e}')" >${e} </div>`
               );
@@ -95,7 +109,7 @@
         </div>
         <div class="columns is-vcentered">
           <script>
-            ["√", "10^x", "log", "Exp", "Mod"].forEach((e) => {
+            ["√", "10ˣ", "log", "Exp", "Mod"].forEach((e) => {
               document.write(
                 `<div class="column is-one-fifth button is-light" ng-click="HandleInput('${e}')" >${e} </div>`
               );

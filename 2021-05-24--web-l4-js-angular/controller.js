@@ -5,6 +5,15 @@ function log(x) {
 angular.module("App", []).controller("Controller", function ($scope) {
   $scope.calculation = "";
   $scope.input = "0";
+  $scope.memory = "0";
+
+  $scope.MemoryDisplay = function () {
+    if ($scope.memory === "0") {
+      return "";
+    } else {
+      return $scope.memory;
+    }
+  };
 
   $scope.HandleInput = function (action) {
     log("________ action: " + action);
@@ -16,8 +25,48 @@ angular.module("App", []).controller("Controller", function ($scope) {
       else $scope.input += action;
     }
 
-    // .
-    if (action === ".") {
+    // memory
+    {
+      if (action === "MC") {
+        $scope.memory = "0";
+      }
+      if (action === "MR") {
+        $scope.input = $scope.memory;
+      }
+      if (action === "MS") {
+        $scope.memory = $scope.input;
+      }
+      if (action === "M") {
+      }
+      if (action === "M+") {
+        $scope.memory = math.evaluate(`${$scope.memory} + ${$scope.input}`);
+      }
+      if (action === "M-") {
+        $scope.memory = math.evaluate(`${$scope.memory} - ${$scope.input}`);
+      }
+    }
+
+    // x²
+    if (action === "x²") {
+      $scope.input = $scope.input * $scope.input;
+    }
+
+    // xʸ
+    if (action === "xʸ") {
+      if($scope.calculation === ""){
+        $scope.calculation = $scope.input;
+        $scope.input = "0";
+      }
+      else {
+        $scope.input = Math.pow(math.evaluate($scope.calculation), $scope.input);
+        $scope.calculation = "";
+      }
+    }
+
+    // ↑
+    if (action === "↑") {
+      $scope.calculation = $scope.input;
+      $scope.input = "0";
     }
 
     // C
@@ -39,7 +88,7 @@ angular.module("App", []).controller("Controller", function ($scope) {
 
     // π
     if (action === "π") {
-      $scope.input = 'π'
+      $scope.input = "π";
     }
 
     // + - * /
@@ -56,17 +105,56 @@ angular.module("App", []).controller("Controller", function ($scope) {
       $scope.input += ".";
     }
 
+    // ±
+    if (action === "±" && $scope.input !== "0") {
+      if($scope.input[0] === '-') {
+        $scope.input = $scope.input.substring(1);
+      }
+      else
+        $scope.input = "-" + $scope.input;
+    }
+
     // =
     if (action === "=") {
       log("evaluating...");
       log("input: " + $scope.input);
       log("calculation: " + $scope.calculation);
 
-      $scope.calculation = $scope.calculation.replace('π', '3.14159')
-      $scope.input = $scope.input.replace('π', '3.14159')
+      $scope.calculation = $scope.calculation.replace("π", "3.14159");
+      $scope.input = $scope.input.replace("π", "3.14159");
 
       $scope.input = math.evaluate($scope.calculation + $scope.input) + "";
-      // $scope.calculation = "";
+      $scope.calculation = "";
+    }
+
+    // √
+    if (action === "√") {
+      $scope.input = Math.sqrt($scope.input);
+    }
+
+    // 10ˣ
+    if (action === "10ˣ") {
+      $scope.input = Math.pow(10, $scope.input);
+    }
+
+    // log
+    if (action === "log") {
+      $scope.input = Math.log($scope.input);
+    }
+
+    // Exp
+    if (action === "Exp") {
+      $scope.input = Math.exp($scope.input);
+    }
+
+    // Mod
+    if (action === "Mod") {
+      $scope.input = $scope.calculation % $scope.input;
+    }
+
+    // n!
+    if (action === "n!") {
+      $scope.input = math.factorial ($scope.input);
     }
   };
 });
