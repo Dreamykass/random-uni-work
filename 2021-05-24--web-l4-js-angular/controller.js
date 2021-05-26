@@ -53,19 +53,23 @@ angular.module("App", []).controller("Controller", function ($scope) {
 
     // xʸ
     if (action === "xʸ") {
-      if($scope.calculation === ""){
+      if ($scope.calculation === "") {
         $scope.calculation = $scope.input;
         $scope.input = "0";
-      }
-      else {
-        $scope.input = Math.pow(math.evaluate($scope.calculation), $scope.input);
+      } else {
+        $scope.input = Math.pow(
+          math.evaluate($scope.calculation),
+          $scope.input
+        );
         $scope.calculation = "";
       }
     }
 
     // ↑
     if (action === "↑") {
-      $scope.calculation = $scope.input;
+      // $scope.calculation = $scope.input;
+      // $scope.input = "0";
+      $scope.calculation = $scope.calculation + $scope.input;
       $scope.input = "0";
     }
 
@@ -94,7 +98,7 @@ angular.module("App", []).controller("Controller", function ($scope) {
     // + - * /
     ["+", "-", "*", "/"].forEach((op) => {
       if (action === op) {
-        $scope.calculation += $scope.input;
+        // $scope.calculation += $scope.input;
         $scope.calculation += op;
         $scope.input = "0";
       }
@@ -107,11 +111,9 @@ angular.module("App", []).controller("Controller", function ($scope) {
 
     // ±
     if (action === "±" && $scope.input !== "0") {
-      if($scope.input[0] === '-') {
+      if ($scope.input[0] === "-") {
         $scope.input = $scope.input.substring(1);
-      }
-      else
-        $scope.input = "-" + $scope.input;
+      } else $scope.input = "-" + $scope.input;
     }
 
     // =
@@ -123,7 +125,11 @@ angular.module("App", []).controller("Controller", function ($scope) {
       $scope.calculation = $scope.calculation.replace("π", "3.14159");
       $scope.input = $scope.input.replace("π", "3.14159");
 
-      $scope.input = math.evaluate($scope.calculation + $scope.input) + "";
+      // $scope.input = math.evaluate($scope.calculation + $scope.input) + "";
+      // $scope.input = math.evaluate($scope.calculation + "+" + $scope.input) + "";
+      // $scope.input = math.evaluate($scope.calculation.concat($scope.input)) + "";
+      // $scope.input = math.evaluate($scope.calculation + " " + $scope.input) + "";
+      $scope.input = math.evaluate($scope.calculation) + "";
       $scope.calculation = "";
     }
 
@@ -154,7 +160,17 @@ angular.module("App", []).controller("Controller", function ($scope) {
 
     // n!
     if (action === "n!") {
-      $scope.input = math.factorial ($scope.input);
+      $scope.input = math.factorial($scope.input);
+    }
+
+    // (
+    if (action === "(") {
+      $scope.calculation = "(" + $scope.calculation + "";
+    }
+
+    // )
+    if (action === ")") {
+      $scope.calculation = "" + $scope.calculation + ")";
     }
   };
 });
