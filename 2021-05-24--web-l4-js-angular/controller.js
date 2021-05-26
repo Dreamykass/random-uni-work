@@ -6,6 +6,7 @@ angular.module("App", []).controller("Controller", function ($scope) {
   $scope.calculation = "";
   $scope.input = "0";
   $scope.memory = "0";
+  $scope.averageArray = [];
 
   $scope.MemoryDisplay = function () {
     if ($scope.memory === "0") {
@@ -171,6 +172,22 @@ angular.module("App", []).controller("Controller", function ($scope) {
     // )
     if (action === ")") {
       $scope.calculation = "" + $scope.calculation + ")";
+    }
+
+    // )
+    if (action === "X̄+") {
+$scope.averageArray.push($scope.input)
+    }
+
+    // )
+    if (action === "X̄=") {
+      let total = 0;
+      for (let i = 0; i < $scope.averageArray.length; i++) {
+        total += +$scope.averageArray[i];
+      }
+      let avg = total / $scope.averageArray.length;
+
+      $scope.input = "" + avg;
     }
   };
 });

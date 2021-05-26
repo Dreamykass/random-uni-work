@@ -161,6 +161,15 @@
             });
           </script>
         </div>
+        <div class="columns is-vcentered">
+          <script>
+            ["X̄+", "X̄=", " ", " ", " "].forEach((e) => {
+              document.write(
+                      `<div class="column is-one-fifth button is-white is-large" ng-click="HandleInput('${e}')" >${e} </div>`
+              );
+            });
+          </script>
+        </div>
       </div>
       <!-- ---------------------------------------------- calculator --------------------- -->
     </div>
