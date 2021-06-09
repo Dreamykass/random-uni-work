@@ -1,0 +1,137 @@
+@import "https://jenil.github.io/bulmaswatch/nuclear/bulmaswatch.min.css";
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  /* background-image: url('http://macanta.com.au/wp-content/uploads/2013/12/Monopoly.jpg'); */
+  /* background-repeat: no-repeat;
+  background-size: 100% 100%;
+  background-attachment: fixed; */
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+* {
+  box-sizing: border-box;
+}
+.form-group{
+  max-width: 30%;
+  
+}
+#root{
+  margin-left:27vw;
+  margin-top:18vh;
+  /* background-color: #D9EDD2; */
+  width:48vw;
+  height: 63vh;
+}
+.divek{
+  width: 80%;
+}
+.divek input{
+  width: 50%;
+}
+.cb{
+  width: 20px !important;
+}
+
+.wl{
+  border-style: solid;
+  border-radius: 15px;
+  border-width: 30px;
+  /* background-color: white; */
+  width:40%;
+  min-height:50vh;
+  margin: auto;
+  padding: 15px;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  
+}
+.nazwa{
+  text-align: center;
+  vertical-align: middle;
+  line-height: 10vh; 
+  /* background-color: aqua; */
+  height:10vh;
+  border-style: solid;
+  border-radius: 15px;
+  border-width: 3px;
+  font-size:30px;
+}
+img{
+  height:20px;
+  float:right;
+}
+.wz{
+  border-style: solid;
+  border-radius: 15px;
+  border-width: 30px;
+  /* background-color: red; */
+  width:40%;
+  min-height:50vh;
+  margin: auto;
+  padding: 15px;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+}
+.wi{
+  /* background-color: rgb(152, 152, 218); */
+  width:40%;
+  height:50vh;
+  margin: auto;
+}
+.lo{
+  /* background-color: green; */
+  width:40%;
+  height:50vh;
+  margin: auto;
+}
+.tekst{
+  /* color:red; */
+  float:right;
+}
+.tek{
+  margin-top:30px;
+  height:26vh;
+  width:15vw;
+  /* background-color: white; */
+}
+.line{
+  width: 14.5vw;
+  height: 47px;
+  border-bottom: 1px solid black;
+  position: absolute;
+  }
+.prison img{
+  height:200px;
+  /* background-color: white; */
+  margin-left: 40px;
+  float: none;
+}
+.question img{
+  height:200px;
+  /* background-color: white; */
+  margin-left: 40px;
+  float: none;
+}
+.wi, .lo{
+  padding:15px;
+  margin: auto;
+  border-style: solid;
+  border-radius: 15px;
+  border-width: 30px;
+}
+.aa{
+  font-weight: bolder;
+  margin-left:40%;
+  
+}
+.a{
+  margin-bottom:30px;
+}
