@@ -10,12 +10,12 @@
 </head>
 
 <script>
-  angular.module("App", []).controller("Controller", function ($scope, $http) {
+  angular.module("App", []).controller("Controller", function ($scope, $http, $compile) {
     $scope.category = "all";
     $scope.producer = "all";
     $scope.order = "id";
     $scope.order2 = "asc";
-    $scope.mainpanel2 = "<h1>siema</h1>";
+    $scope.mainpanel2 = [];
 
     $scope.onLoadSidepanelSelectedRefresh = function () {
       document.getElementById("categories_list_selected").innerHTML = $scope.category;
@@ -57,6 +57,7 @@
             cat.innerHTML += `
                     <input type="button" class="button" ng-click="category = 'all'; onLoad();" value="...all">
                     `;
+            $scope.$apply()
           }
         };
         xhttp.open("GET", "http://localhost:8000/categories", true);
@@ -78,6 +79,7 @@
             prod.innerHTML += `
                     <input type="button" class="button" ng-click="producer = 'all'; onLoad();" value="...all">
                     `;
+            $scope.$apply()
           }
         };
         xhttp.open("GET", "http://localhost:8000/producers", true);
@@ -86,23 +88,26 @@
 
       // order:
       {
-        const ord = document.getElementById("order_list");
-        ord.innerHTML += `<input type="button" class="button" ng-click="order = 'id'; onLoad(); window.alert();" value="Id">`;
-        ord.innerHTML += `<input type="button" class="button" ng-click="order = 'category'; onLoad();" value="Category">`;
-        ord.innerHTML += `<input type="button" class="button" ng-click="order = 'producer'; onLoad();" value="Producer">`;
-        ord.innerHTML += `<input type="button" class="button" ng-click="order = 'name'; onLoad();" value="Name">`;
-        ord.innerHTML += `<input type="button" class="button" ng-click="order = 'price'; onLoad();" value="Price">`;
-        ord.innerHTML += `<br>`;
-        ord.innerHTML += `<br>`;
-        ord.innerHTML += `<input type="button" class="button" ng-click="order2 = 'asc'; onLoad();" value="Ascending">`;
-        ord.innerHTML += `<input type="button" class="button" ng-click="order2 = 'desc'; onLoad();" value="Descending">`;
+        // const ord = document.getElementById("order_list");
+        let ord = "";
+        ord += `<input type="button" class="button" ng-click="order = 'id'; onLoad(); " value="Id">`;
+        ord += `<input type="button" class="button" ng-click="order = 'category'; onLoad();" value="Category">`;
+        ord += `<input type="button" class="button" ng-click="order = 'producer'; onLoad();" value="Producer">`;
+        ord += `<input type="button" class="button" ng-click="order = 'name'; onLoad();" value="Name">`;
+        ord += `<input type="button" class="button" ng-click="order = 'price'; onLoad();" value="Price">`;
+        ord += `<br>`;
+        ord += `<br>`;
+        ord += `<input type="button" class="button" ng-click="order2 = 'asc'; onLoad();" value="Ascending">`;
+        ord += `<input type="button" class="button" ng-click="order2 = 'desc'; onLoad();" value="Descending">`;
+        // document.getElementById("order_list").innerHTML = $compile(ord)($scope);
+        angular.element(document.querySelector('#order_list')).append($compile(ord)($scope))
       }
     }
 
     $scope.onLoad = function () {
       let mainpanel = document.getElementById("mainpanel");
       mainpanel.innerHTML = "";
-      $scope.mainpanel2 = "";
+      $scope.mainpanel2 = [];
 
       $scope.onLoadSidepanelSelectedRefresh();
 
@@ -112,9 +117,10 @@
         .then(
           function (res) {
             // $scope.mainpanel2 = res.data;
-            let images = "";
+            // let images = "";
+            let images = [];
             JSON.parse(JSON.stringify(res.data)).forEach((item) => {
-              images += `
+              image = `
                       <div
                         class="box column is-one-quarter-desktop is-half-tablet" 
                         ng-click="detailed(${item.id})"
@@ -128,60 +134,19 @@
                           </div>
                         </div>
                       </div>`;
+              images.push(image);
             });
 
-            images += `</div>`;
-            $scope.mainpanel2 += images;
+            // images += `</div>`;
+            // $scope.mainpanel2 += images;
+            // window.alert(images);
+            $scope.mainpanel2 = images;
 
           },
           function () {
             $scope.mainpanel2 = "ERROR";
           }
         );
-
-      // ------------------------------------------------------- old stuff 
-      // const xhttp = new XMLHttpRequest();
-      // xhttp.onreadystatechange = function () {
-      //   if (this.readyState === 4 && this.status === 200) {
-      //     let images = `<div class="columns is-multiline">`;
-      //     // window.alert(this.responseText);
-      //     const json = JSON.parse(this.responseText);
-      //     json.forEach((item) => {
-      //       images += `
-      //           <div
-      //             class="box column is-one-quarter-desktop is-half-tablet" 
-      //             ng-click="detailed(${item.id})"
-      //           >
-      //             <div class="card">
-      //               <h3>${item.name}</h3> <h4>${item.price}€$</h4>
-      //               <div class="card-image">
-      //                 <figure class="image is-3by2">
-      //                   <img src='http://localhost:8000/media/${item.photo_filename}' alt=''/>
-      //                 </figure>
-      //               </div>
-      //             </div>
-      //           </div>`;
-      //     });
-
-      //     images += `</div>`;
-      //     mainpanel.innerHTML += images;
-      //     $scope.mainpanel += images;
-      //     // $scope.mainpanel = "siema";
-      //     // window.alert("siema");
-      //     // $scope.$apply()
-      //   }
-      // };
-
-      // if ($scope.category === "") $scope.category = "all";
-      // if ($scope.producer === "") $scope.category = "all";
-
-      // xhttp.open(
-      //   "GET",
-      //   `http://localhost:8000/all?category=${$scope.category}&producer=${$scope.producer}&order=${$scope.order}&order2=${$scope.order2}`,
-      //   true
-      // );
-      // xhttp.send();
-      // ------------------------------------------------------- old stuff 
     }
 
     $scope.detailed = function (id) {
@@ -235,7 +200,7 @@
         Shop catalogue app!
       </a>
       <a class="navbar-item" ng-click="onLoadSidepanelFiltering(); onLoad()">
-        Shop catalogue app! {{ order }}
+        Shop catalogue app!
       </a>
     </div>
   </nav>
@@ -256,11 +221,19 @@
 
   <section class="section content">
     <div class="columns">
-      <div class="column is-one-quarter" id="sidepanel"></div>
+      <div class="column is-one-quarter box">
+        <label>Search: <input ng-model="searchText"></label>
+        <div id="sidepanel"></div>
+      </div>
       <div class="column">
-        <section ng-bind-html='mainpanel2 | trustAs'>
-          <!-- {{ mainpanel2 }} -->
+        <!-- <section ng-bind-html='mainpanel2 | trustAs'>
+        </section> -->
+        <!-- <div class="columns is-multiline"> -->
+        <section ng-repeat="x in mainpanel2 | filter:searchText" ng-bind-html="x | trustAs" ng-if="true">
+          <!-- {{x}} -->
+          <!-- <div ng-bind-html="<h1>siema</h1>"></div> -->
         </section>
+        <!-- </div> -->
         <hr>
         <section id="mainpanel"></section>
       </div>
