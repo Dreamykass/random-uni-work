@@ -44,19 +44,21 @@
 
       // categories:
       {
-        const cat = document.getElementById("categories_list");
+        // const cat = document.getElementById("categories_list");
+        let cat = "";
         const xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function () {
           if (this.readyState === 4 && this.status === 200) {
             const json = JSON.parse(this.responseText);
             json.forEach((item) => {
-              cat.innerHTML += `
+              cat += `
                     <input type="button" class="button" ng-click="category = '${item}'; onLoad();" value="${item}">
                     `;
             });
-            cat.innerHTML += `
+            cat += `
                     <input type="button" class="button" ng-click="category = 'all'; onLoad();" value="...all">
                     `;
+            angular.element(document.querySelector('#categories_list')).append($compile(cat)($scope))
             $scope.$apply()
           }
         };
@@ -66,19 +68,21 @@
 
       // producers:
       {
-        const prod = document.getElementById("producers_list");
+        // const prod = document.getElementById("producers_list");
+        let prod = "";
         const xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function () {
           if (this.readyState === 4 && this.status === 200) {
             const json = JSON.parse(this.responseText);
             json.forEach((item) => {
-              prod.innerHTML += `
+              prod += `
                     <input type="button" class="button" ng-click="producer = '${item}'; onLoad();" value="${item}">
                     `;
             });
-            prod.innerHTML += `
+            prod += `
                     <input type="button" class="button" ng-click="producer = 'all'; onLoad();" value="...all">
                     `;
+            angular.element(document.querySelector('#producers_list')).append($compile(prod)($scope))
             $scope.$apply()
           }
         };
@@ -120,20 +124,21 @@
             // let images = "";
             let images = [];
             JSON.parse(JSON.stringify(res.data)).forEach((item) => {
-              image = `
-                      <div
-                        class="box column is-one-quarter-desktop is-half-tablet" 
-                        ng-click="detailed(${item.id})"
-                      >
-                        <div class="card">
-                          <h3>${item.name}</h3> <h4>${item.price}€$</h4>
-                          <div class="card-image">
-                            <figure class="image is-3by2">
-                              <img src='http://localhost:8000/media/${item.photo_filename}' alt=''/>
-                            </figure>
-                          </div>
-                        </div>
-                      </div>`;
+              // image = `
+              //         <div
+              //           class="box column is-one-quarter-desktop is-half-tablet" 
+              //           ng-click="detailed(${item.id})"
+              //         >
+              //           <div class="card">
+              //             <h3>${item.name}</h3> <h4>${item.price}€$</h4>
+              //             <div class="card-image">
+              //               <figure class="image is-3by2">
+              //                 <img src='http://localhost:8000/media/${item.photo_filename}' alt=''/>
+              //               </figure>
+              //             </div>
+              //           </div>
+              //         </div>`;
+              const image = item;
               images.push(image);
             });
 
@@ -153,7 +158,9 @@
       let mainpanel = document.getElementById("mainpanel");
       let sidepanel = document.getElementById("sidepanel");
 
-      sidepanel.innerHTML = `<div class="box" ng-click="onLoadSidepanelFiltering(); onLoad()"><button class="button">Go back!</button></div>`;
+      sidepanel.innerHTML = `<div class="box" onclick="location.reload()"><button class="button">Go back!</button></div>`;
+      // angular.element(document.querySelector('#sidepanel'))
+      //   .replaceWith($compile(`<div class="box"><button class="button" ng-click="onLoadSidepanelFiltering(); onLoad();">Go back!</button></div>`)($scope));
       mainpanel.innerHTML = "<h1>Waiting...</h1>";
 
       const xhttp = new XMLHttpRequest();
@@ -170,6 +177,8 @@
                 <h4>Producer: ${json.producer}</h4>
                 <h4>Category: ${json.category}</h4>
                 </div>`;
+          $scope.mainpanel2 = [];
+          $scope.$apply();
         }
       };
       xhttp.open("GET", `http://localhost:8000/detailed/${id}`, true);
@@ -229,11 +238,21 @@
         <!-- <section ng-bind-html='mainpanel2 | trustAs'>
         </section> -->
         <!-- <div class="columns is-multiline"> -->
-        <section ng-repeat="x in mainpanel2 | filter:searchText" ng-bind-html="x | trustAs" ng-if="true">
-          <!-- {{x}} -->
-          <!-- <div ng-bind-html="<h1>siema</h1>"></div> -->
+        <!-- <section ng-repeat="x in mainpanel2 | filter:searchText" ng-bind-html="x | trustAs" ng-if="true">
+        </section> -->
+        <section ng-repeat="item in mainpanel2 | filter:searchText" ng-if="true">
+          <div class="box column is-one-quarter-desktop is-half-tablet" ng-click="detailed(item.id);">
+            <div class="card">
+              <h3>{{item.name}}</h3>
+              <h4>{{item.price}}€$</h4>
+              <div class="card-image">
+                <figure class="image is-3by2">
+                  <img src='http://localhost:8000/media/{{item.photo_filename}}' alt='' />
+                </figure>
+              </div>
+            </div>
+          </div>
         </section>
-        <!-- </div> -->
         <hr>
         <section id="mainpanel"></section>
       </div>
