@@ -237,26 +237,29 @@
       <div class="column">
         <!-- <section ng-bind-html='mainpanel2 | trustAs'>
         </section> -->
-        <!-- <div class="columns is-multiline"> -->
-        <!-- <section ng-repeat="x in mainpanel2 | filter:searchText" ng-bind-html="x | trustAs" ng-if="true">
+        <div class="columns is-multiline">
+          <!-- <section ng-repeat="x in mainpanel2 | filter:searchText" ng-bind-html="x | trustAs" ng-if="true">
         </section> -->
-        <section ng-repeat="item in mainpanel2 | filter:searchText" ng-if="true">
-          <div class="box column is-one-quarter-desktop is-half-tablet" ng-click="detailed(item.id);">
-            <div class="card">
-              <h3>{{item.name}}</h3>
-              <h4>{{item.price}}€$</h4>
-              <div class="card-image">
-                <figure class="image is-3by2">
-                  <img src='http://localhost:8000/media/{{item.photo_filename}}' alt='' />
-                </figure>
+          <!-- <section ng-repeat="item in mainpanel2 | filter:searchText" ng-if="true"> -->
+          <div class="column is-one-quarter-desktop is-half-tablet" ng-repeat="item in mainpanel2 | filter:searchText"
+            ng-if="true" ng-click="detailed(item.id);">
+            <section class="box">
+              <div class="card">
+                <h3>{{item.name}}</h3>
+                <h4>{{item.price}}€$</h4>
+                <div class="card-image">
+                  <figure class="image is-3by2">
+                    <img src='http://localhost:8000/media/{{item.photo_filename}}' alt='' />
+                  </figure>
+                </div>
               </div>
-            </div>
+            </section>
           </div>
-        </section>
-        <hr>
-        <section id="mainpanel"></section>
+          <!-- </section> -->
+          <hr>
+          <section id="mainpanel"></section>
+        </div>
       </div>
-    </div>
   </section>
 </body>
 
